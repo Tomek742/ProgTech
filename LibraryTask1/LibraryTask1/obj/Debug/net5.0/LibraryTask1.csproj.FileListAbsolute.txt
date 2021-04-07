@@ -1,0 +1,12 @@
+C:\Users\1mich\source\repos\Tomek742\ProgTech\LibraryTask1\LibraryTask1\bin\Debug\net5.0\LibraryTask1.deps.json
+C:\Users\1mich\source\repos\Tomek742\ProgTech\LibraryTask1\LibraryTask1\bin\Debug\net5.0\LibraryTask1.dll
+C:\Users\1mich\source\repos\Tomek742\ProgTech\LibraryTask1\LibraryTask1\bin\Debug\net5.0\ref\LibraryTask1.dll
+C:\Users\1mich\source\repos\Tomek742\ProgTech\LibraryTask1\LibraryTask1\bin\Debug\net5.0\LibraryTask1.pdb
+C:\Users\1mich\source\repos\Tomek742\ProgTech\LibraryTask1\LibraryTask1\obj\Debug\net5.0\LibraryTask1.csprojAssemblyReference.cache
+C:\Users\1mich\source\repos\Tomek742\ProgTech\LibraryTask1\LibraryTask1\obj\Debug\net5.0\LibraryTask1.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\1mich\source\repos\Tomek742\ProgTech\LibraryTask1\LibraryTask1\obj\Debug\net5.0\LibraryTask1.AssemblyInfoInputs.cache
+C:\Users\1mich\source\repos\Tomek742\ProgTech\LibraryTask1\LibraryTask1\obj\Debug\net5.0\LibraryTask1.AssemblyInfo.cs
+C:\Users\1mich\source\repos\Tomek742\ProgTech\LibraryTask1\LibraryTask1\obj\Debug\net5.0\LibraryTask1.csproj.CoreCompileInputs.cache
+C:\Users\1mich\source\repos\Tomek742\ProgTech\LibraryTask1\LibraryTask1\obj\Debug\net5.0\LibraryTask1.dll
+C:\Users\1mich\source\repos\Tomek742\ProgTech\LibraryTask1\LibraryTask1\obj\Debug\net5.0\ref\LibraryTask1.dll
+C:\Users\1mich\source\repos\Tomek742\ProgTech\LibraryTask1\LibraryTask1\obj\Debug\net5.0\LibraryTask1.pdb
