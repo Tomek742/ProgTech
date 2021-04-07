@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Task1
+namespace LibraryTask1
 {
     public class Class1
     {
