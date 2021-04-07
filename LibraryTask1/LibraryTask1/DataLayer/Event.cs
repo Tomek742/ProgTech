@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace LibraryTask1.DataLayer
 {
-    class Events
+    class Event
     {
         public Book BookItem { get; set; }
         public Reader ReaderPerson { get; set; }
         public DateTime Date { get; set; }
 
-        public Events(Book bookItem, Reader readerPerson, DateTime date)
+        public Event(Book bookItem, Reader readerPerson, DateTime date)
         {
             BookItem = bookItem;
             ReaderPerson = readerPerson;
