@@ -11,24 +11,24 @@ namespace LibraryTask1.LogicLayer
     {
         private Book tbook = null;
         private Content List = Content();
-        public void AddBook(Book book)
+        public void AddBook(Book book,int Amount)
         {
-            if (book != null)
-                Content.Add(book);
+            if (book != null || Amount != null)
+                Content.Add(book, Amount);
             else
                 throw new ArgumentNullException();
         }
-        public void DestroyBook(Book book)
+        public void DestroyBook(Book book, int Amount)
         {
-            if (book != null)
-                Content.Remove(book);
+            if (book != null || Amount != null)
+                Content.Remove(book, Amount);
             else
                 throw new ArgumentNullException();
         }
 
-        public void BorrowBook(Book book)
+        public void BorrowBook(Book book, int Amount)
         {
-            if (book != null)
+            if (book != null || Amount != null)
                 book.IsAvailable.set(false);
             else
                 throw new ArgumentNullException();
@@ -57,12 +57,26 @@ namespace LibraryTask1.LogicLayer
             if (CheckIfBookIsAvaliable(Name))  //checking if any in the library
                 throw new Exception("No book avaliable!");
             else
-                Event tmp = new Event(GetBook(Name), user, DateTime.Now.Date); // to do add to some sort of registry?
+                Event tmp = new Event(GetBook(Name), user, DateTime.Now.Date); // to do: add to some sort of registry of events?
         }
         public bool CheckIfBookIsAvaliable(string Name)
         {
             tbook = GetBook(Name);
-            return tbook.IsAvailable;
+            if (tbook == null)
+                return false;
+            else
+                return tbook.IsAvailable;
         }
+        public Reader GetReader(Event e)
+        {
+            return e.ReaderPerson.get();
+        }
+        /*public void AddReader(string name, int ID)
+        {
+            if (name != null || ID != null)
+                x.Add(name, ID);
+            else
+                throw new ArgumentNullException();
+        }*/ //Do we want list of readers?
     }
 }
