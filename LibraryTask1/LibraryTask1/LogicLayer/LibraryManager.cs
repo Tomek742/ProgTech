@@ -9,74 +9,112 @@ namespace LibraryTask1.LogicLayer
 {
     class LibraryManager
     {
-        private Book tbook = null;
-        private Content List = Content();
-        public void AddBook(Book book,int Amount)
-        {
-            if (book != null || Amount != null)
-                Content.Add(book, Amount);
-            else
-                throw new ArgumentNullException();
-        }
-        public void DestroyBook(Book book, int Amount)
-        {
-            if (book != null || Amount != null)
-                Content.Remove(book, Amount);
-            else
-                throw new ArgumentNullException();
-        }
+        private List<Reader> readers = new List<Reader>();
+        private List<Book> books = new List<Book>();
+        private List<Content> contents = new List<Content>();
+        private List<Event> borrows = new List<Event>();
 
-        public void BorrowBook(Book book, int Amount)
+        //Books
+        public void AddBook(Book book)
         {
-            if (book != null || Amount != null)
-                book.IsAvailable.set(false);
+            if (book != null)
+                books.Add(book);
             else
                 throw new ArgumentNullException();
         }
-        public int GetBookID(Book book)
+        public void DestroyBook(Book book)
         {
-            return book.BookID.get();
+            if (book != null)
+                books.Remove(book);
+            else
+                throw new ArgumentNullException();
         }
-        public Book GetBook(string Name)
+        public string GetBookID(string name)
         {
             try
             {
-                return List.BookList[Name];
+                return books.Find(x => x.Name == name ).ToString();
             }
-            catch(KeynotFoundException)
+            catch (KeyNotFoundException)
+            {
+                return null;
+            }
+        }
+        public Book GetBook(string name)
+        {
+            try
+            {
+                return books.Find(x => x.Name == name );
+            }
+            catch (KeyNotFoundException)
             {
                 return null;
             }
             //Content.
             //Finding Book based of name in Content
         }
-
-        public void AddBorrowEvent(Reader user, string Name){
-            if (user == null || Name == null)
-                throw new ArgumentNullException();
-            if (CheckIfBookIsAvaliable(Name))  //checking if any in the library
-                throw new Exception("No book avaliable!");
-            else
-                Event tmp = new Event(GetBook(Name), user, DateTime.Now.Date); // to do: add to some sort of registry of events?
-        }
-        public bool CheckIfBookIsAvaliable(string Name)
+        public bool CheckIfBookIsAvaliable(Book book)
         {
-            tbook = GetBook(Name);
-            if (tbook == null)
+            if (book == null)
                 return false;
             else
-                return tbook.IsAvailable;
+                return book.IsAvailable;
         }
-        public Reader GetReader(Event e)
+
+        //Readers
+        public void AddReader(Reader reader)
         {
-            return e.ReaderPerson.get();
-        }
-        /*public void AddReader(string name, int ID)
-        {
-            if (name != null || ID != null)
-                x.Add(name, ID);
+            if (reader != null)
+                readers.Add(reader);
             else
                 throw new ArgumentNullException();
-        }*/ //Do we want list of readers?
+        } //Do we want list of readers?
+
+        public Reader GetReader(int ID)
+        {
+            try
+            {
+                return readers.Find(x => x.ReaderID == ID );
+            }
+            catch (KeyNotFoundException)
+            {
+                return null;
+            }
+        }
+
+        public string GetReaderID(string name)
+        {
+            try
+            {
+                return readers.Find(x => x.Name == name ).ToString();
+            }
+            catch (KeyNotFoundException)
+            {
+                return null;
+            }
+        }
+
+        //Borrows
+        public void BorrowBook(Book book, Reader reader, int ID)
+        {
+            if (book != null || reader != null)
+            {
+                book.IsAvailable = false;
+                borrows.Add(new Event(book, reader, DateTime.Now.Date, ID));
+            }
+            else
+                throw new ArgumentNullException();
+        }
+
+        //public Event GetBorrow(int ID)
+        //{
+        //    return borrows.Find(x => x.EventID == ID );
+        //}
+
+        //    public void ReturnBook(Book book, Reader reader)
+        //    {
+        //        borrows.Remove.
+        //        //if (borrows.Find(x => x.BookItem.Equals(book))        }
+        //}
     }
 }
