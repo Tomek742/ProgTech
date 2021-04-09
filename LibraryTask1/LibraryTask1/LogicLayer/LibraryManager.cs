@@ -29,15 +29,15 @@ namespace LibraryTask1.LogicLayer
             else
                 throw new ArgumentNullException();
         }
-        public string GetBookID(string name)
+        public int GetBookID(string name)
         {
             try
             {
-                return books.Find(x => x.Name == name ).ToString();
+                return books.Find(x => x.Name == name ).BookID;
             }
             catch (KeyNotFoundException)
             {
-                return null;
+                return 0;
             }
         }
         public Book GetBook(string name)
@@ -82,16 +82,44 @@ namespace LibraryTask1.LogicLayer
             }
         }
 
-        public string GetReaderID(string name)
+        public int GetReaderID(string name)
         {
             try
             {
-                return readers.Find(x => x.Name == name ).ToString();
+                return readers.Find(x => x.Name == name ).ReaderID;
             }
             catch (KeyNotFoundException)
             {
-                return null;
+                return 0;
             }
+        }
+
+        public void RemoveReader ( Reader reader )
+        {
+            readers.Remove(reader);
+        }
+
+        //Content
+        public void SetQuantity(Book book, int quantity)
+        {
+            contents.Add(new Content(book, quantity));
+        }
+
+        public void ChangeQuantity(Book book, int newQuantity)
+        {
+            Content temp = contents.Find(x => x.BookItem == book);
+            if (newQuantity < 0 && temp.Quantity >= 0)
+            {
+                temp.Quantity += newQuantity;
+            }
+            if (newQuantity > 0)
+            {
+                temp.Quantity += newQuantity;
+            }
+        }
+        public int GetQuantity(Book book)
+        {
+            return contents.Find(x => x.BookItem == book).Quantity;
         }
 
         //Borrows
@@ -99,8 +127,9 @@ namespace LibraryTask1.LogicLayer
         {
             if (book != null || reader != null)
             {
-                book.IsAvailable = false;
                 borrows.Add(new Event(book, reader, DateTime.Now.Date, ID));
+                ChangeQuantity(book, -1);
+                if (GetQuantity(book) == 0) book.IsAvailable = false;
             }
             else
                 throw new ArgumentNullException();
