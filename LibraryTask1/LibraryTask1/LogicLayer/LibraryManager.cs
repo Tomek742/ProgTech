@@ -7,7 +7,7 @@ using LibraryTask1.DataLayer;
 
 namespace LibraryTask1.LogicLayer
 {
-    class LibraryManager
+    class LibraryManager : LibraryManagerInterface
     {
         private List<Reader> readers = new List<Reader>();
         private List<Book> books = new List<Book>();
@@ -19,39 +19,19 @@ namespace LibraryTask1.LogicLayer
         {
             if (book != null)
                 books.Add(book);
-            else
-                throw new ArgumentNullException();
         }
         public void DestroyBook(Book book)
         {
             if (book != null)
                 books.Remove(book);
-            else
-                throw new ArgumentNullException();
         }
         public int GetBookID(string name)
         {
-            try
-            {
-                return books.Find(x => x.Name == name ).BookID;
-            }
-            catch (KeyNotFoundException)
-            {
-                return 0;
-            }
+            return books.Find(x => x.Name == name ).BookID;
         }
         public Book GetBook(string name)
         {
-            try
-            {
-                return books.Find(x => x.Name == name );
-            }
-            catch (KeyNotFoundException)
-            {
-                return null;
-            }
-            //Content.
-            //Finding Book based of name in Content
+            return books.Find(x => x.Name == name );
         }
         public bool CheckIfBookIsAvaliable(Book book)
         {
@@ -66,32 +46,16 @@ namespace LibraryTask1.LogicLayer
         {
             if (reader != null)
                 readers.Add(reader);
-            else
-                throw new ArgumentNullException();
-        } //Do we want list of readers?
+        }
 
         public Reader GetReader(int ID)
         {
-            try
-            {
-                return readers.Find(x => x.ReaderID == ID );
-            }
-            catch (KeyNotFoundException)
-            {
-                return null;
-            }
+            return readers.Find(x => x.ReaderID == ID );
         }
 
         public int GetReaderID(string name)
         {
-            try
-            {
-                return readers.Find(x => x.Name == name ).ReaderID;
-            }
-            catch (KeyNotFoundException)
-            {
-                return 0;
-            }
+            return readers.Find(x => x.Name == name ).ReaderID;
         }
 
         public void RemoveReader ( Reader reader )
@@ -111,10 +75,12 @@ namespace LibraryTask1.LogicLayer
             if (newQuantity < 0 && temp.Quantity >= 0)
             {
                 temp.Quantity += newQuantity;
+                if (GetQuantity(book) == 0) book.IsAvailable = false;
             }
             if (newQuantity > 0)
             {
                 temp.Quantity += newQuantity;
+                if (GetQuantity(book) == 0) book.IsAvailable = false;
             }
         }
         public int GetQuantity(Book book)
@@ -131,19 +97,22 @@ namespace LibraryTask1.LogicLayer
                 ChangeQuantity(book, -1);
                 if (GetQuantity(book) == 0) book.IsAvailable = false;
             }
-            else
-                throw new ArgumentNullException();
         }
 
-        //public Event GetBorrow(int ID)
-        //{
-        //    return borrows.Find(x => x.EventID == ID );
-        //}
+        public void RemoveBorrow(int ID)
+        {
+            Event temp = borrows.Find(x => x.EventID == ID);
+            if (temp != null)
+            {
+                borrows.Remove(temp);
+                ChangeQuantity(temp.BookItem, 1);
+                if (GetQuantity(temp.BookItem) != 0) temp.BookItem.IsAvailable = true;
+            }
+        }
 
-        //    public void ReturnBook(Book book, Reader reader)
-        //    {
-        //        borrows.Remove.
-        //        //if (borrows.Find(x => x.BookItem.Equals(book))        }
-        //}
+        public Event GetBorrow(int ID)
+        {
+            return borrows.Find(x => x.EventID == ID);
+        }
     }
 }
