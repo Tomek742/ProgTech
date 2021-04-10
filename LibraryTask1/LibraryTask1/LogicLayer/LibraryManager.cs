@@ -135,15 +135,28 @@ namespace LibraryTask1.LogicLayer
                 throw new ArgumentNullException();
         }
 
-        //public Event GetBorrow(int ID)
-        //{
-        //    return borrows.Find(x => x.EventID == ID );
-        //}
+        public string GetAuthor(string name)
+        {
+            try
+            {
+                return books.Find(x => x.Name == name).Author;
+            }
+            catch (KeyNotFoundException)
+            {
+                return null;
+            }
+        }
+        public string GetReaderName(int ID)
+        {
+            try
+            {
+                return readers.Find(x => x.ReaderID == ID).Name;
+            }
+            catch (KeyNotFoundException)
+            {
+                return null;
+            }
+        }
 
-        //    public void ReturnBook(Book book, Reader reader)
-        //    {
-        //        borrows.Remove.
-        //        //if (borrows.Find(x => x.BookItem.Equals(book))        }
-        //}
     }
 }
