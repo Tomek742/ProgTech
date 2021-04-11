@@ -7,7 +7,7 @@ using LibraryTask1.DataLayer;
 
 namespace LibraryTask1.LogicLayer
 {
-    class LibraryManager : LibraryManagerInterface
+    public class LibraryManager : LibraryManagerInterface
     {
         private List<Reader> readers = new List<Reader>();
         private List<Book> books = new List<Book>();

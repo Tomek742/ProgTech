@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LibraryTask1.DataLayer
 {
-    class Event
+    public class Event
     {
         public Book BookItem { get; set; }
         public Reader ReaderPerson { get; set; }

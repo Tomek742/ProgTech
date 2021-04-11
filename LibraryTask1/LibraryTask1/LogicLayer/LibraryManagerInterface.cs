@@ -7,7 +7,7 @@ using LibraryTask1.DataLayer;
 
 namespace LibraryTask1.LogicLayer
 {
-    interface LibraryManagerInterface
+    public interface LibraryManagerInterface
     {
         void AddBook(Book book);
         void DestroyBook(Book book);

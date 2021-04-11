@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LibraryTask1.DataLayer
 {
-    class Reader
+    public class Reader
     {
         public string Name { get; set; }
         public int ReaderID { get; set; }
