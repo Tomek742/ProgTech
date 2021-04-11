@@ -8,11 +8,12 @@ namespace UnitTests
     public class Logic
     {
         [TestMethod]
-        public void EventConstructor()
+        public void LibraryManagerConstructor()
         {
             LibraryManager library = new LibraryManager(null);
             Assert.AreEqual(library.manager, null);
 
         }
+        
     }
 }
