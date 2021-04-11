@@ -26,5 +26,6 @@ namespace Data
         void BorrowBook(int bookID, int readerID, int ID);
         void RemoveBorrow(int ID);
         Event GetBorrow(int ID);
+        int GetBorrowID(int ID);
     }
 }

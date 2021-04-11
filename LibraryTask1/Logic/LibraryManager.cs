@@ -7,9 +7,14 @@ using Data;
 
 namespace Logic
 {
-    public class LibraryManager
+    public class LibraryManager : ILibraryManager
     {
         public IDataManager manager;
+
+        public LibraryManager(IDataManager manager)
+        {
+            this.manager = manager;
+        }
 
         //Adding,setting
         public void AddBook (Book book)

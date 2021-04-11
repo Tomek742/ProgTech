@@ -8,7 +8,7 @@ namespace Data
 {
     public class DataManager : IDataManager
     {
-        private DataStorage storage;
+        public DataStorage storage;
 
         public DataManager(DataStorage storage)
         {
@@ -112,7 +112,7 @@ namespace Data
 
         public void RemoveBorrow(int ID)
         {
-            Event temp = storage.borrows.Find(x => x.EventID == ID);
+            Event temp = GetBorrow(ID);
             if (temp != null)
             {
                 storage.borrows.Remove(temp);
@@ -124,6 +124,11 @@ namespace Data
         public Event GetBorrow(int ID)
         {
             return storage.borrows.Find(x => x.EventID == ID);
+        }
+
+        public int GetBorrowID(int ID)
+        {
+            return storage.borrows.Find(x => x.EventID == ID).EventID;
         }
     }
 }
