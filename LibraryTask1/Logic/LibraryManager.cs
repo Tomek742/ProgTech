@@ -7,112 +7,51 @@ using Data;
 
 namespace Logic
 {
-    public class LibraryManager : LibraryManagerInterface
+    public class LibraryManager
     {
-        private List<Reader> readers = new List<Reader>();
-        private List<Book> books = new List<Book>();
-        private List<Content> contents = new List<Content>();
-        private List<Event> borrows = new List<Event>();
+        public IDataManager manager;
 
-        //Books
-        public void AddBook(Book book)
+        //Adding,setting
+        public void AddBook (Book book)
         {
-            if (book != null)
-                books.Add(book);
-        }
-        public void DestroyBook(Book book)
-        {
-            if (book != null)
-                books.Remove(book);
-        }
-        public int GetBookID(string name)
-        {
-            return books.Find(x => x.Name == name ).BookID;
-        }
-        public Book GetBook(string name)
-        {
-            return books.Find(x => x.Name == name );
-        }
-        public bool CheckIfBookIsAvaliable(Book book)
-        {
-            if (book == null)
-                return false;
-            else
-                return book.IsAvailable;
+            manager.AddBook(book);
         }
 
-        //Readers
-        public void AddReader(Reader reader)
+        public void AddReader (Reader reader)
         {
-            if (reader != null)
-                readers.Add(reader);
+            manager.AddReader(reader);
         }
 
-        public Reader GetReader(int ID)
+        public void SetQuantity (int ID, int quantity)
         {
-            return readers.Find(x => x.ReaderID == ID );
+            manager.SetQuantity(ID, quantity);
         }
 
-        public int GetReaderID(string name)
+        public void BorrowBook (int bookID, int readerID, int ID)
         {
-            return readers.Find(x => x.Name == name ).ReaderID;
+            manager.BorrowBook(bookID, readerID, ID);
         }
 
-        public void RemoveReader ( Reader reader )
+        //Removing
+        public void RemoveBook (int ID)
         {
-            readers.Remove(reader);
+            manager.RemoveBook(ID);
         }
 
-        //Content
-        public void SetQuantity(Book book, int quantity)
+        public void RemoveReader (int ID)
         {
-            contents.Add(new Content(book, quantity));
+            manager.RemoveReader(ID);
         }
 
-        public void ChangeQuantity(Book book, int newQuantity)
+        public void RemoveBorrow (int ID)
         {
-            Content temp = contents.Find(x => x.BookItem == book);
-            if (newQuantity < 0 && temp.Quantity >= 0)
-            {
-                temp.Quantity += newQuantity;
-                if (GetQuantity(book) == 0) book.IsAvailable = false;
-            }
-            if (newQuantity > 0)
-            {
-                temp.Quantity += newQuantity;
-                if (GetQuantity(book) == 0) book.IsAvailable = false;
-            }
-        }
-        public int GetQuantity(Book book)
-        {
-            return contents.Find(x => x.BookItem == book).Quantity;
+            manager.RemoveBorrow(ID);
         }
 
-        //Borrows
-        public void BorrowBook(Book book, Reader reader, int ID)
+        //Changing
+        public void ChangeQuantity(int ID, int newValue)
         {
-            if (book != null || reader != null)
-            {
-                borrows.Add(new Event(book, reader, DateTime.Now.Date, ID));
-                ChangeQuantity(book, -1);
-                if (GetQuantity(book) == 0) book.IsAvailable = false;
-            }
-        }
-
-        public void RemoveBorrow(int ID)
-        {
-            Event temp = borrows.Find(x => x.EventID == ID);
-            if (temp != null)
-            {
-                borrows.Remove(temp);
-                ChangeQuantity(temp.BookItem, 1);
-                if (GetQuantity(temp.BookItem) != 0) temp.BookItem.IsAvailable = true;
-            }
-        }
-
-        public Event GetBorrow(int ID)
-        {
-            return borrows.Find(x => x.EventID == ID);
+            manager.ChangeQuantity(ID,newValue);
         }
     }
 }
