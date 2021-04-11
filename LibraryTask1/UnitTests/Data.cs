@@ -28,13 +28,13 @@ namespace UnitTests
         [TestMethod]
         public void EventConstructor()
         {
-            DateTime sss = DateTime.Now;
+            DateTime time = DateTime.Now;
             Reader reader = new Reader("Adam", 1);
             Book book = new Book("Pan Tadeusz", "Adam Mickiewicz", 1);
-            Event e = new Event(book, reader, sss, 1);
+            Event e = new Event(book, reader, time, 1);
             Assert.AreEqual(e.BookItem, book);
             Assert.AreEqual(e.ReaderPerson, reader);
-            Assert.AreEqual(e.Date, sss);
+            Assert.AreEqual(e.Date, time);
             Assert.AreEqual(e.EventID, 1);
         }
 
