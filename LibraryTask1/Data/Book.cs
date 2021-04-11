@@ -13,12 +13,12 @@ namespace Data
         public int BookID { get; set; }
         public bool IsAvailable { get; set; }
 
-        public Book(string name, string author, int bookID, bool isAvailable)
+        public Book(string name, string author, int bookID)
         {
             Name = name;
             Author = author;
             BookID = bookID;
-            IsAvailable = isAvailable;
+            IsAvailable = true;
         }
     }
 }
