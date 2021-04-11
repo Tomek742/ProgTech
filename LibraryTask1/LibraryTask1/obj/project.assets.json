@@ -4629,9 +4629,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\1mich\\source\\repos\\Tomek742\\ProgTech\\LibraryTask1\\LibraryTask1\\LibraryTask1.csproj",
-      "projectName": "LibraryTask1",
-      "projectPath": "C:\\Users\\1mich\\source\\repos\\Tomek742\\ProgTech\\LibraryTask1\\LibraryTask1\\LibraryTask1.csproj",
+      "projectUniqueName": "C:\\Users\\1mich\\source\\repos\\Tomek742\\ProgTech\\LibraryTask1\\LibraryTask1\\temp.csproj",
+      "projectName": "temp",
+      "projectPath": "C:\\Users\\1mich\\source\\repos\\Tomek742\\ProgTech\\LibraryTask1\\LibraryTask1\\temp.csproj",
       "packagesPath": "C:\\Users\\1mich\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\1mich\\source\\repos\\Tomek742\\ProgTech\\LibraryTask1\\LibraryTask1\\obj\\",
       "projectStyle": "PackageReference",

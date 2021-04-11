@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "7YNFUajILBsBbzP6E6c5Hzfcyikw1vpM/8EEpuNqTZuO5tfiJsdvzBDwZ8vbQjn/X/+cqw72HNDYdFRsJsGl4A==",
+  "dgSpecHash": "uu7gdGkzMwVuLZvM9Uw+J1ykfI0yJK2QS8KGK+UJ8KHPp5lM+/wdjjGBuws6MIQLXXkXVbqhhmRdm+MUr/oZjg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\1mich\\source\\repos\\Tomek742\\ProgTech\\LibraryTask1\\LibraryTask1\\LibraryTask1.csproj",
+  "projectFilePath": "C:\\Users\\1mich\\source\\repos\\Tomek742\\ProgTech\\LibraryTask1\\LibraryTask1\\temp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\1mich\\.nuget\\packages\\microsoft.codecoverage\\16.5.0\\microsoft.codecoverage.16.5.0.nupkg.sha512",
     "C:\\Users\\1mich\\.nuget\\packages\\microsoft.csharp\\4.0.1\\microsoft.csharp.4.0.1.nupkg.sha512",
