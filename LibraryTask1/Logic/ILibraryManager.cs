@@ -9,9 +9,10 @@ namespace Logic
 {
     public interface ILibraryManager
     {
-        void AddBook(Book book);
-        void AddReader(Reader reader);
+        void AddBook(IBook book);
+        void AddReader(IReader reader);
         void SetQuantity(int ID, int quantity);
+        void GetQuantity(int ID);
         void BorrowBook(int bookID, int readerID, int ID);
         void RemoveBook(int ID);
         void RemoveReader(int ID);

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Data
 {
-    public class Reader
+    public class Reader : IReader
     {
         public string Name { get; set; }
         public int ReaderID { get; set; }

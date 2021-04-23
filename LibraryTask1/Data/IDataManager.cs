@@ -8,14 +8,14 @@ namespace Data
 {
     public interface IDataManager
     {
-        void AddBook(Book book);
+        void AddBook(IBook book);
         void RemoveBook(int ID);
-        Book GetBookID(int ID);
-        Book GetBook(string name);
+        IBook GetBookID(int ID);
+        IBook GetBook(string name);
         bool CheckIfBookIsAvaliable(int ID);
 
-        void AddReader(Reader reader);
-        Reader GetReader(int ID);
+        void AddReader(IReader reader);
+        IReader GetReader(int ID);
         int GetReaderID(string name);
         void RemoveReader(int ID);
 

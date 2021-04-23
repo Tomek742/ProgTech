@@ -15,30 +15,30 @@ namespace Data
             this.storage = storage;
         }
 
-        public void AddBook(Book book)
+        public void AddBook(IBook book)
         {
             if (book != null)
                 storage.books.Add(book);
         }
         public void RemoveBook(int ID)
         {
-            Book temp = GetBookID(ID);
+            IBook temp = GetBookID(ID);
             if (temp != null)
             {
                 storage.books.Remove(temp);
             }
         }
-        public Book GetBookID(int ID)
+        public IBook GetBookID(int ID)
         {
             return storage.books.Find(x => x.BookID == ID);
         }
-        public Book GetBook(string name)
+        public IBook GetBook(string name)
         {
             return storage.books.Find(x => x.Name == name);
         }
         public bool CheckIfBookIsAvaliable(int ID)
         {
-            Book temp = GetBookID(ID);
+            IBook temp = GetBookID(ID);
             if (temp == null)
                 return false;
             else
@@ -46,13 +46,13 @@ namespace Data
         }
 
         //Readers
-        public void AddReader(Reader reader)
+        public void AddReader(IReader reader)
         {
             if (reader != null)
                 storage.readers.Add(reader);
         }
 
-        public Reader GetReader(int ID)
+        public IReader GetReader(int ID)
         {
             return storage.readers.Find(x => x.ReaderID == ID);
         }
@@ -64,7 +64,7 @@ namespace Data
 
         public void RemoveReader(int ID)
         {
-            Reader temp = GetReader(ID);
+            IReader temp = GetReader(ID);
             if (temp != null)
             {
                 storage.readers.Remove(temp);
@@ -74,7 +74,7 @@ namespace Data
         //Content
         public void SetQuantity(int ID, int quantity)
         {
-            Book temp = GetBookID(ID);
+            IBook temp = GetBookID(ID);
             storage.contents.Add(new Content(temp, quantity));
         }
 
@@ -100,8 +100,8 @@ namespace Data
         //Borrows
         public void BorrowBook(int bookID, int readerID, int ID)
         {
-            Book tempBook = GetBookID(bookID);
-            Reader tempReader = GetReader(readerID);
+            IBook tempBook = GetBookID(bookID);
+            IReader tempReader = GetReader(readerID);
             if (tempBook != null || tempReader != null)
             {
                 storage.borrows.Add(new Event(tempBook, tempReader, DateTime.Now.Date, ID));
@@ -113,10 +113,11 @@ namespace Data
         public void RemoveBorrow(int ID)
         {
             Event temp = GetBorrow(ID);
+            IBook tempBook = GetBookID(ID);
             if (temp != null)
             {
                 storage.borrows.Remove(temp);
-                ChangeQuantity(temp.BookItem.BookID, 1);
+                ChangeQuantity(tempBook.BookID, 1);
                 if (GetQuantity(temp.BookItem.BookID) != 0) temp.BookItem.IsAvailable = true;
             }
         }

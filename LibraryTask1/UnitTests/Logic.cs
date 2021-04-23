@@ -86,12 +86,12 @@ namespace UnitTests
             libManager.RemoveBorrow(1);
             Assert.IsNull(libManager.manager.GetBorrow(1));
         }
+
         [TestMethod]
         public void LibraryManagerConstructor()
         {
             LibraryManager library = new LibraryManager(null);
             Assert.AreEqual(library.manager, null);
-
         }
     }
 }

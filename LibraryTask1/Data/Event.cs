@@ -8,12 +8,12 @@ namespace Data
 {
     public class Event
     {
-        public Book BookItem { get; set; }
-        public Reader ReaderPerson { get; set; }
+        public IBook BookItem { get; set; }
+        public IReader ReaderPerson { get; set; }
         public DateTime Date { get; set; }
         public int EventID { get; set; }
 
-        public Event(Book bookItem, Reader readerPerson, DateTime date, int eventID)
+        public Event(IBook bookItem, IReader readerPerson, DateTime date, int eventID)
         {
             BookItem = bookItem;
             ReaderPerson = readerPerson;

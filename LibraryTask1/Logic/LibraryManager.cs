@@ -17,12 +17,12 @@ namespace Logic
         }
 
         //Adding,setting
-        public void AddBook (Book book)
+        public void AddBook (IBook book)
         {
             manager.AddBook(book);
         }
 
-        public void AddReader (Reader reader)
+        public void AddReader (IReader reader)
         {
             manager.AddReader(reader);
         }
@@ -30,6 +30,11 @@ namespace Logic
         public void SetQuantity (int ID, int quantity)
         {
             manager.SetQuantity(ID, quantity);
+        }
+
+        public void GetQuantity (int ID)
+        {
+            manager.GetQuantity(ID);
         }
 
         public void BorrowBook (int bookID, int readerID, int ID)

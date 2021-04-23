@@ -8,8 +8,8 @@ namespace Data
 {
     public class DataStorage
     {
-        public List<Reader> readers = new List<Reader>();
-        public List<Book> books = new List<Book>();
+        public List<IReader> readers = new List<IReader>();
+        public List<IBook> books = new List<IBook>();
         public List<Content> contents = new List<Content>();
         public List<Event> borrows = new List<Event>();
     }
