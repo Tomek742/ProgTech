@@ -9,9 +9,9 @@ namespace Logic
 {
     public class LibraryManager : ILibraryManager
     {
-        public IDataManager manager;
+        public DataManagerBase manager;
 
-        public LibraryManager(IDataManager manager)
+        public LibraryManager(DataManagerBase manager)
         {
             this.manager = manager;
         }

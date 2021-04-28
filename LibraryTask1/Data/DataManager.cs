@@ -6,21 +6,21 @@ using System.Threading.Tasks;
 
 namespace Data
 {
-    public class DataManager : IDataManager
+    public class DataManager : DataManagerBase
     {
-        public DataStorage storage;
+        public IDataStorage storage;
 
-        public DataManager(DataStorage storage)
+        public DataManager(IDataStorage storage)
         {
             this.storage = storage;
         }
 
-        public void AddBook(IBook book)
+        public override void AddBook(IBook book)
         {
             if (book != null)
                 storage.books.Add(book);
         }
-        public void RemoveBook(int ID)
+        public override void RemoveBook(int ID)
         {
             IBook temp = GetBookID(ID);
             if (temp != null)
@@ -28,15 +28,15 @@ namespace Data
                 storage.books.Remove(temp);
             }
         }
-        public IBook GetBookID(int ID)
+        public override IBook GetBookID(int ID)
         {
             return storage.books.Find(x => x.BookID == ID);
         }
-        public IBook GetBook(string name)
+        public override IBook GetBook(string name)
         {
             return storage.books.Find(x => x.Name == name);
         }
-        public bool CheckIfBookIsAvaliable(int ID)
+        public override bool CheckIfBookIsAvaliable(int ID)
         {
             IBook temp = GetBookID(ID);
             if (temp == null)
@@ -46,23 +46,23 @@ namespace Data
         }
 
         //Readers
-        public void AddReader(IReader reader)
+        public override void AddReader(IReader reader)
         {
             if (reader != null)
                 storage.readers.Add(reader);
         }
 
-        public IReader GetReader(int ID)
+        public override IReader GetReader(int ID)
         {
             return storage.readers.Find(x => x.ReaderID == ID);
         }
 
-        public int GetReaderID(string name)
+        public override int GetReaderID(string name)
         {
             return storage.readers.Find(x => x.Name == name).ReaderID;
         }
 
-        public void RemoveReader(int ID)
+        public override void RemoveReader(int ID)
         {
             IReader temp = GetReader(ID);
             if (temp != null)
@@ -72,15 +72,15 @@ namespace Data
         }
 
         //Content
-        public void SetQuantity(int ID, int quantity)
+        public override void SetQuantity(int ID, int quantity)
         {
             IBook temp = GetBookID(ID);
             storage.contents.Add(new Content(temp, quantity));
         }
 
-        public void ChangeQuantity(int ID, int newQuantity)
+        public override void ChangeQuantity(int ID, int newQuantity)
         {
-            Content temp = storage.contents.Find(x => x.BookItem.BookID == ID);
+            IContent temp = storage.contents.Find(x => x.BookItem.BookID == ID);
             if (newQuantity < 0 && temp.Quantity >= 0)
             {
                 temp.Quantity += newQuantity;
@@ -92,13 +92,13 @@ namespace Data
                 if (GetQuantity(ID) == 0) temp.BookItem.IsAvailable = false;
             }
         }
-        public int GetQuantity(int ID)
+        public override int GetQuantity(int ID)
         {
             return storage.contents.Find(x => x.BookItem.BookID == ID).Quantity;
         }
 
         //Borrows
-        public void BorrowBook(int bookID, int readerID, int ID)
+        public override void BorrowBook(int bookID, int readerID, int ID)
         {
             IBook tempBook = GetBookID(bookID);
             IReader tempReader = GetReader(readerID);
@@ -110,9 +110,9 @@ namespace Data
             }
         }
 
-        public void RemoveBorrow(int ID)
+        public override void RemoveBorrow(int ID)
         {
-            Event temp = GetBorrow(ID);
+            IEvent temp = GetBorrow(ID);
             IBook tempBook = GetBookID(ID);
             if (temp != null)
             {
@@ -122,12 +122,12 @@ namespace Data
             }
         }
 
-        public Event GetBorrow(int ID)
+        public override IEvent GetBorrow(int ID)
         {
             return storage.borrows.Find(x => x.EventID == ID);
         }
 
-        public int GetBorrowID(int ID)
+        public override int GetBorrowID(int ID)
         {
             return storage.borrows.Find(x => x.EventID == ID).EventID;
         }

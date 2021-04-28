@@ -31,7 +31,7 @@ namespace UnitTests
             DateTime time = DateTime.Now;
             IReader reader = new Reader("Adam", 1);
             IBook book = new Book("Pan Tadeusz", "Adam Mickiewicz", 1);
-            Event e = new Event(book, reader, time, 1);
+            IEvent e = new Event(book, reader, time, 1);
             Assert.AreEqual(e.BookItem, book);
             Assert.AreEqual(e.ReaderPerson, reader);
             Assert.AreEqual(e.Date, time);
@@ -42,7 +42,7 @@ namespace UnitTests
         public void ContentConstructor()
         {
             IBook book = new Book("Pan Tadeusz", "Adam Mickiewicz", 1);
-            Content e = new Content(book, 1);
+            IContent e = new Content(book, 1);
             Assert.AreEqual(e.BookItem, book);
             Assert.AreEqual(e.Quantity, 1);
         }

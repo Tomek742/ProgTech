@@ -8,50 +8,52 @@ namespace UnitTests
     [TestClass]
     public class Logic
     {
-        private DataStorage storage;
+        private IDataStorage storage;
         private LibraryManager libManager;
+        private ILibraryManager ILibManager;
 
         [TestInitialize]
         public void Initialize()
         {
             storage = new DataStorage();
             libManager = new LibraryManager(new DataManager(storage));
+            ILibManager = libManager;
         }
 
         [TestMethod]
         public void AddBookTest()
         {
-            libManager.AddBook(new Book("Pan Tadeusz", "Adam Mickiewicz", 1));
+            ILibManager.AddBook(new Book("Pan Tadeusz", "Adam Mickiewicz", 1));
             Assert.AreEqual(libManager.manager.GetBookID(1).BookID, 1);
         }
 
         [TestMethod]
         public void RemoveBookTest()
         {
-            libManager.AddBook(new Book("Pan Tadeusz", "Adam Mickiewicz", 1));
-            libManager.RemoveBook(1);
+            ILibManager.AddBook(new Book("Pan Tadeusz", "Adam Mickiewicz", 1));
+            ILibManager.RemoveBook(1);
             Assert.IsNull(libManager.manager.GetBookID(1));
         }
 
         [TestMethod]
         public void AddReaderTest()
         {
-            libManager.AddReader(new Reader("Tadeusz", 1));
+            ILibManager.AddReader(new Reader("Tadeusz", 1));
             Assert.AreEqual(libManager.manager.GetReader(1).ReaderID, 1);
         }
 
         [TestMethod]
         public void RemoveReaderTest()
         {
-            libManager.AddReader(new Reader("Tadeusz", 1));
-            libManager.RemoveReader(1);
+            ILibManager.AddReader(new Reader("Tadeusz", 1));
+            ILibManager.RemoveReader(1);
             Assert.IsNull(libManager.manager.GetReader(1));
         }
 
         [TestMethod]
         public void SetQuantityTest()
         {
-            libManager.AddBook(new Book("Pan Tadeusz", "Adam Mickiewicz", 1));
+            ILibManager.AddBook(new Book("Pan Tadeusz", "Adam Mickiewicz", 1));
             libManager.SetQuantity(1, 5);
             Assert.AreEqual(libManager.manager.GetQuantity(1), 5);
         }
@@ -59,19 +61,19 @@ namespace UnitTests
         [TestMethod]
         public void ChangeQuantityTest()
         {
-            libManager.AddBook(new Book("Pan Tadeusz", "Adam Mickiewicz", 1));
+            ILibManager.AddBook(new Book("Pan Tadeusz", "Adam Mickiewicz", 1));
             libManager.SetQuantity(1, 5);
-            libManager.ChangeQuantity(1, 1);
+            ILibManager.ChangeQuantity(1, 1);
             Assert.AreEqual(libManager.manager.GetQuantity(1), 6);
         }
 
         [TestMethod]
         public void AddBorrowTest()
         {
-            libManager.AddBook(new Book("Pan Tadeusz", "Adam Mickiewicz", 1));
-            libManager.AddReader(new Reader("Tadeusz", 1));
-            libManager.SetQuantity(1, 2);
-            libManager.BorrowBook(1, 1, 1);
+            ILibManager.AddBook(new Book("Pan Tadeusz", "Adam Mickiewicz", 1));
+            ILibManager.AddReader(new Reader("Tadeusz", 1));
+            ILibManager.SetQuantity(1, 2);
+            ILibManager.BorrowBook(1, 1, 1);
             Assert.AreEqual(libManager.manager.GetBorrowID(1), 1);
             Assert.AreEqual(libManager.manager.GetQuantity(1), 1);
         }
@@ -79,11 +81,11 @@ namespace UnitTests
         [TestMethod]
         public void RemoveBorrowTest()
         {
-            libManager.AddBook(new Book("Pan Tadeusz", "Adam Mickiewicz", 1));
-            libManager.AddReader(new Reader("Tadeusz", 1));
-            libManager.SetQuantity(1, 2);
-            libManager.BorrowBook(1, 1, 1);
-            libManager.RemoveBorrow(1);
+            ILibManager.AddBook(new Book("Pan Tadeusz", "Adam Mickiewicz", 1));
+            ILibManager.AddReader(new Reader("Tadeusz", 1));
+            ILibManager.SetQuantity(1, 2);
+            ILibManager.BorrowBook(1, 1, 1);
+            ILibManager.RemoveBorrow(1);
             Assert.IsNull(libManager.manager.GetBorrow(1));
         }
 
