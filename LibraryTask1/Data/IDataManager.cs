@@ -6,26 +6,26 @@ using System.Threading.Tasks;
 
 namespace Data
 {
-    public interface IDataManager
+    public abstract class IDataManager
     {
-        void AddBook(IBook book);
-        void RemoveBook(int ID);
-        IBook GetBookID(int ID);
-        IBook GetBook(string name);
-        bool CheckIfBookIsAvaliable(int ID);
+        public abstract void AddBook(IBook book);
+        public abstract void RemoveBook(int ID);
+        public abstract IBook GetBookID(int ID);
+        public abstract IBook GetBook(string name);
+        public abstract bool CheckIfBookIsAvaliable(int ID);
 
-        void AddReader(IReader reader);
-        IReader GetReader(int ID);
-        int GetReaderID(string name);
-        void RemoveReader(int ID);
+        public abstract void AddReader(IReader reader);
+        public abstract IReader GetReader(int ID);
+        public abstract int GetReaderID(string name);
+        public abstract void RemoveReader(int ID);
 
-        void SetQuantity(int ID, int quantity);
-        void ChangeQuantity(int ID, int newQuantity);
-        int GetQuantity(int ID);
+        public abstract void SetQuantity(int ID, int quantity);
+        public abstract void ChangeQuantity(int ID, int newQuantity);
+        public abstract int GetQuantity(int ID);
 
-        void BorrowBook(int bookID, int readerID, int ID);
-        void RemoveBorrow(int ID);
-        Event GetBorrow(int ID);
-        int GetBorrowID(int ID);
+        public abstract void BorrowBook(int bookID, int readerID, int ID);
+        public abstract void RemoveBorrow(int ID);
+        public abstract Event GetBorrow(int ID);
+        public abstract int GetBorrowID(int ID);
     }
 }
