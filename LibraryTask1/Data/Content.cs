@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Data
 {
-    public class Content
+    public class Content : IContent
     {
         public IBook BookItem { get; set; }
         public int Quantity { get; set; }

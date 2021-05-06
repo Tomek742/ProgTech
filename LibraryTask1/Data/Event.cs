@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Data
 {
-    public class Event
+    public class Event : IEvent
     {
         public IBook BookItem { get; set; }
         public IReader ReaderPerson { get; set; }
