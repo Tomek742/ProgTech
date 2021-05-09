@@ -63,9 +63,9 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Button Content="Connect to datebase" HorizontalAlignment="Center" Grid.Column="0" Command="{Binding FetchDataCommand}"/>
-            <Button Content="Add Reder" HorizontalAlignment="Center" Grid.Column="1" Command="{Binding AddCommand}"/>
-            <Button Content="Delete Reader" HorizontalAlignment="Center" Grid.Column="2" Command="{Binding DeleteCommand}" />
-            <Button Content="Update Reader" HorizontalAlignment="Center" Grid.Column="3" Command="{Binding UpdateCommand}"/>
+            <Button Content="Add Reder" HorizontalAlignment="Center" Grid.Column="1" Command="{Binding AddReaderCommand}"/>
+            <Button Content="Delete Reader" HorizontalAlignment="Center" Grid.Column="2" Command="{Binding DeleteReaderCommand}" />
+            <Button Content="Update Reader" HorizontalAlignment="Center" Grid.Column="3" Command="{Binding UpdateReaderCommand}"/>
         </Grid>
         <Grid>
             <Grid.RowDefinitions>
@@ -97,9 +97,9 @@
             <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Path=CurrentPerson.LastName, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource textStyleTextBlock}" Margin="5,0,10,0" />
             <TextBox Grid.Row="3" Grid.Column="2" Text="{Binding Path=LastName, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource textStyleTextBox}" Margin="5,0,10,0"/>
 
-            <TextBlock Grid.Row="4" Grid.Column="0" Style="{StaticResource smallTitleStyle}">Suffix:</TextBlock>
+            <TextBlock Grid.Row="4" Grid.Column="0" Style="{StaticResource smallTitleStyle}">ID:</TextBlock>
             <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding Path=CurrentPerson.Suffix, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource textStyleTextBlock}" Margin="5,0,10,0" />
-            <TextBox Grid.Row="4" Grid.Column="2" Text="{Binding Path=Suffix, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource textStyleTextBox}" Margin="5,0,10,0"/>
+            <TextBox Grid.Row="4" Grid.Column="2" Text="{Binding Path=ID, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource textStyleTextBox}" Margin="5,0,10,0"/>
         </Grid>
     </StackPanel>
 </Window>
