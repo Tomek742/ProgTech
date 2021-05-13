@@ -1,12 +1,11 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using Logic;
 using Data;
+using Service;
 
 namespace UnitTests
 {
     [TestClass]
-    public class Logic
+    public class Service
     {
         private IDataStorage storage;
         private LibraryManager libManager;

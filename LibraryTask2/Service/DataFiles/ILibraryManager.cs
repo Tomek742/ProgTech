@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Data;
 
-namespace Logic
+namespace Service
 {
     public interface ILibraryManager
     {

@@ -66,7 +66,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Logic.cs" />
+    <Compile Include="Service.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Data.cs" />
   </ItemGroup>
@@ -78,9 +78,9 @@
       <Project>{26750705-1cf3-4435-b262-443a8ff09bf3}</Project>
       <Name>Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Logic\Logic.csproj">
-      <Project>{d480a003-2f22-4006-87bc-a633268f107c}</Project>
-      <Name>Logic</Name>
+    <ProjectReference Include="..\Service\Service.csproj">
+      <Project>{25969c74-4c2f-455a-bbbc-928b73d97d52}</Project>
+      <Name>Service</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
