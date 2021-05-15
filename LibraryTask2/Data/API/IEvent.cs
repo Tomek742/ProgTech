@@ -1,12 +1,12 @@
 ﻿using System;
 
-namespace Data
+namespace Data.API
 {
     public interface IEvent
     {
-        IBook BookItem { get; set; }
-        IReader ReaderPerson { get; set; }
-        DateTime Date { get; set; }
         int EventID { get; set; }
+        DateTime? Date { get; set; }
+        int? BookID { get; set; }
+        int? ReaderID { get; set; }
     }
 }

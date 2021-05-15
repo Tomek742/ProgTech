@@ -1,5 +1,5 @@
 ﻿
-namespace Data
+namespace Data.API
 {
     public interface IBook
     {

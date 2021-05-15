@@ -9,7 +9,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Data.Database
+namespace Data
 {
 	using System.Data.Linq;
 	using System.Data.Linq.Mapping;
@@ -30,15 +30,15 @@ namespace Data.Database
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void InsertBook(Book instance);
-    partial void UpdateBook(Book instance);
-    partial void DeleteBook(Book instance);
-    partial void InsertEvent(Event instance);
-    partial void UpdateEvent(Event instance);
-    partial void DeleteEvent(Event instance);
-    partial void InsertReader(Reader instance);
-    partial void UpdateReader(Reader instance);
-    partial void DeleteReader(Reader instance);
+    partial void InsertBooks(Books instance);
+    partial void UpdateBooks(Books instance);
+    partial void DeleteBooks(Books instance);
+    partial void InsertEvents(Events instance);
+    partial void UpdateEvents(Events instance);
+    partial void DeleteEvents(Events instance);
+    partial void InsertReaders(Readers instance);
+    partial void UpdateReaders(Readers instance);
+    partial void DeleteReaders(Readers instance);
     #endregion
 		
 		public LibraryDataContext() : 
@@ -71,33 +71,33 @@ namespace Data.Database
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<Book> Books
+		public System.Data.Linq.Table<Books> Books
 		{
 			get
 			{
-				return this.GetTable<Book>();
+				return this.GetTable<Books>();
 			}
 		}
 		
-		public System.Data.Linq.Table<Event> Events
+		public System.Data.Linq.Table<Events> Events
 		{
 			get
 			{
-				return this.GetTable<Event>();
+				return this.GetTable<Events>();
 			}
 		}
 		
-		public System.Data.Linq.Table<Reader> Readers
+		public System.Data.Linq.Table<Readers> Readers
 		{
 			get
 			{
-				return this.GetTable<Reader>();
+				return this.GetTable<Readers>();
 			}
 		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Books")]
-	public partial class Book : INotifyPropertyChanging, INotifyPropertyChanged
+	public partial class Books : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -110,7 +110,7 @@ namespace Data.Database
 		
 		private System.Nullable<bool> _isAvailable;
 		
-		private EntitySet<Event> _Events;
+		private EntitySet<Events> _Events;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -126,9 +126,9 @@ namespace Data.Database
     partial void OnisAvailableChanged();
     #endregion
 		
-		public Book()
+		public Books()
 		{
-			this._Events = new EntitySet<Event>(new Action<Event>(this.attach_Events), new Action<Event>(this.detach_Events));
+			this._Events = new EntitySet<Events>(new Action<Events>(this.attach_Events), new Action<Events>(this.detach_Events));
 			OnCreated();
 		}
 		
@@ -213,7 +213,7 @@ namespace Data.Database
 		}
 		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Book_Event", Storage="_Events", ThisKey="id", OtherKey="book_id")]
-		public EntitySet<Event> Events
+		public EntitySet<Events> Events
 		{
 			get
 			{
@@ -245,21 +245,21 @@ namespace Data.Database
 			}
 		}
 		
-		private void attach_Events(Event entity)
+		private void attach_Events(Events entity)
 		{
 			this.SendPropertyChanging();
-			entity.Book = this;
+			entity.Books = this;
 		}
 		
-		private void detach_Events(Event entity)
+		private void detach_Events(Events entity)
 		{
 			this.SendPropertyChanging();
-			entity.Book = null;
+			entity.Books = null;
 		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Events")]
-	public partial class Event : INotifyPropertyChanging, INotifyPropertyChanged
+	public partial class Events : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -272,9 +272,9 @@ namespace Data.Database
 		
 		private System.Nullable<int> _reader_id;
 		
-		private EntityRef<Book> _Book;
+		private EntityRef<Books> _Book;
 		
-		private EntityRef<Reader> _Reader;
+		private EntityRef<Readers> _Reader;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -290,10 +290,10 @@ namespace Data.Database
     partial void Onreader_idChanged();
     #endregion
 		
-		public Event()
+		public Events()
 		{
-			this._Book = default(EntityRef<Book>);
-			this._Reader = default(EntityRef<Reader>);
+			this._Book = default(EntityRef<Books>);
+			this._Reader = default(EntityRef<Readers>);
 			OnCreated();
 		}
 		
@@ -386,7 +386,7 @@ namespace Data.Database
 		}
 		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Book_Event", Storage="_Book", ThisKey="book_id", OtherKey="id", IsForeignKey=true)]
-		public Book Book
+		public Books Books
 		{
 			get
 			{
@@ -394,7 +394,7 @@ namespace Data.Database
 			}
 			set
 			{
-				Book previousValue = this._Book.Entity;
+				Books previousValue = this._Book.Entity;
 				if (((previousValue != value) 
 							|| (this._Book.HasLoadedOrAssignedValue == false)))
 				{
@@ -414,13 +414,13 @@ namespace Data.Database
 					{
 						this._book_id = default(Nullable<int>);
 					}
-					this.SendPropertyChanged("Book");
+					this.SendPropertyChanged("Books");
 				}
 			}
 		}
 		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Reader_Event", Storage="_Reader", ThisKey="reader_id", OtherKey="id", IsForeignKey=true)]
-		public Reader Reader
+		public Readers Readers
 		{
 			get
 			{
@@ -428,7 +428,7 @@ namespace Data.Database
 			}
 			set
 			{
-				Reader previousValue = this._Reader.Entity;
+				Readers previousValue = this._Reader.Entity;
 				if (((previousValue != value) 
 							|| (this._Reader.HasLoadedOrAssignedValue == false)))
 				{
@@ -448,7 +448,7 @@ namespace Data.Database
 					{
 						this._reader_id = default(Nullable<int>);
 					}
-					this.SendPropertyChanged("Reader");
+					this.SendPropertyChanged("Readers");
 				}
 			}
 		}
@@ -475,7 +475,7 @@ namespace Data.Database
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Readers")]
-	public partial class Reader : INotifyPropertyChanging, INotifyPropertyChanged
+	public partial class Readers : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -484,7 +484,7 @@ namespace Data.Database
 		
 		private string _name;
 		
-		private EntitySet<Event> _Events;
+		private EntitySet<Events> _Events;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -496,9 +496,9 @@ namespace Data.Database
     partial void OnnameChanged();
     #endregion
 		
-		public Reader()
+		public Readers()
 		{
-			this._Events = new EntitySet<Event>(new Action<Event>(this.attach_Events), new Action<Event>(this.detach_Events));
+			this._Events = new EntitySet<Events>(new Action<Events>(this.attach_Events), new Action<Events>(this.detach_Events));
 			OnCreated();
 		}
 		
@@ -543,7 +543,7 @@ namespace Data.Database
 		}
 		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Reader_Event", Storage="_Events", ThisKey="id", OtherKey="reader_id")]
-		public EntitySet<Event> Events
+		public EntitySet<Events> Events
 		{
 			get
 			{
@@ -575,16 +575,16 @@ namespace Data.Database
 			}
 		}
 		
-		private void attach_Events(Event entity)
+		private void attach_Events(Events entity)
 		{
 			this.SendPropertyChanging();
-			entity.Reader = this;
+			entity.Readers = this;
 		}
 		
-		private void detach_Events(Event entity)
+		private void detach_Events(Events entity)
 		{
 			this.SendPropertyChanging();
-			entity.Reader = null;
+			entity.Readers = null;
 		}
 	}
 }

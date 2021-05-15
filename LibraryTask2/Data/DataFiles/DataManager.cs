@@ -1,131 +1,329 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Data.API;
 
-namespace Data
+namespace Data.DataFiles
 {
-    public class DataManager : DataManagerBase
+    public class DataManager : IDataManager
     {
-        public IDataStorage storage;
 
-        public DataManager(IDataStorage storage)
+        public IReader Transform(Readers Reader)
         {
-            this.storage = storage;
+            return new Reader(Reader.name, Reader.id);
+        }
+        public IBook Transform(Books Book)
+        {
+            return new Book(Book.title, Book.author, Book.id);
         }
 
-        public override void AddBook(IBook book)
+        public IEvent Transform(Events Event)
         {
-            if (book != null)
-                storage.books.Add(book);
+            return new Event(Event.id, Event.date, Event.book_id, Event.reader_id);
         }
-        public override void RemoveBook(int ID)
+        public IEnumerable<IReader> GetReaders()
         {
-            IBook temp = GetBookID(ID);
-            if (temp != null)
+            using (var context = new LibraryDataContext())
             {
-                storage.books.Remove(temp);
+                List<IReader> list = new List<IReader>();
+                context.Readers.ToList();
+                foreach (Readers Reader in context.Readers.ToList())
+                {
+                    list.Add(Transform(Reader));
+                }
+                return list;
             }
         }
-        public override IBook GetBookID(int ID)
+
+        public IReader GetReader(int ID)
         {
-            return storage.books.Find(x => x.BookID == ID);
+            using (var context = new LibraryDataContext())
+            {
+                foreach (Readers Reader in context.Readers.ToList())
+                {
+                    if (Reader.id.Equals(ID))
+                    {
+                        return Transform(Reader);
+                    }
+                }
+                return null;
+            }
         }
-        public override IBook GetBook(string name)
+
+        public bool AddReader(int ID, string Name)
         {
-            return storage.books.Find(x => x.Name == name);
-        }
-        public override bool CheckIfBookIsAvaliable(int ID)
-        {
-            IBook temp = GetBookID(ID);
-            if (temp == null)
+            using (var context = new LibraryDataContext())
+            {
+                if (GetReader(ID) == null && !Name.Equals(null))
+                {
+                    Readers NewReader = new Readers
+                    {
+                        name = Name,
+                        id = ID
+                    };
+                    context.Readers.InsertOnSubmit(NewReader);
+                    context.SubmitChanges();
+                    return true;
+                }
                 return false;
-            else
-                return temp.IsAvailable;
-        }
-
-        //Readers
-        public override void AddReader(IReader reader)
-        {
-            if (reader != null)
-                storage.readers.Add(reader);
-        }
-
-        public override IReader GetReader(int ID)
-        {
-            return storage.readers.Find(x => x.ReaderID == ID);
-        }
-
-        public override int GetReaderID(string name)
-        {
-            return storage.readers.Find(x => x.Name == name).ReaderID;
-        }
-
-        public override void RemoveReader(int ID)
-        {
-            IReader temp = GetReader(ID);
-            if (temp != null)
-            {
-                storage.readers.Remove(temp);
             }
         }
 
-        //Content
-        public override void SetQuantity(int ID, int quantity)
+        public bool UpdateReader(int ID, string Name)
         {
-            IBook temp = GetBookID(ID);
-            storage.contents.Add(new Content(temp, quantity));
-        }
-
-        public override void ChangeQuantity(int ID, int newQuantity)
-        {
-            IContent temp = storage.contents.Find(x => x.BookItem.BookID == ID);
-            if (newQuantity < 0 && temp.Quantity >= 0)
+            using (var context = new LibraryDataContext())
             {
-                temp.Quantity += newQuantity;
-                if (GetQuantity(ID) == 0) temp.BookItem.IsAvailable = false;
-            }
-            if (newQuantity > 0)
-            {
-                temp.Quantity += newQuantity;
-                if (GetQuantity(ID) == 0) temp.BookItem.IsAvailable = false;
-            }
-        }
-        public override int GetQuantity(int ID)
-        {
-            return storage.contents.Find(x => x.BookItem.BookID == ID).Quantity;
-        }
-
-        //Borrows
-        public override void BorrowBook(int bookID, int readerID, int ID)
-        {
-            IBook tempBook = GetBookID(bookID);
-            IReader tempReader = GetReader(readerID);
-            if (tempBook != null || tempReader != null)
-            {
-                storage.borrows.Add(new Event(tempBook, tempReader, DateTime.Now.Date, ID));
-                ChangeQuantity(bookID, -1);
-                if (GetQuantity(bookID) == 0) tempBook.IsAvailable = false;
+                Readers Reader = context.Readers.SingleOrDefault(i => i.id == ID);
+                if (GetReader(ID) == null && !Name.Equals(null))
+                {
+                    Reader.name = Name;
+                    Reader.id = ID;
+                    context.SubmitChanges();
+                    return true;
+                }
+                return false;
             }
         }
 
-        public override void RemoveBorrow(int ID)
+        public bool DeleteReader(int ID)
         {
-            IEvent temp = GetBorrow(ID);
-            IBook tempBook = GetBookID(ID);
-            if (temp != null)
+            using (var context = new LibraryDataContext())
             {
-                storage.borrows.Remove(temp);
-                ChangeQuantity(tempBook.BookID, 1);
-                if (GetQuantity(temp.BookItem.BookID) != 0) temp.BookItem.IsAvailable = true;
+                Readers Reader = context.Readers.SingleOrDefault(i => i.id == ID);
+                if (GetReader(ID) != null && !ID.Equals(null))
+                {
+                    context.Readers.DeleteOnSubmit(Reader);
+                    context.SubmitChanges();
+                    return true;
+                }
+                return false;
+            }
+        }
+        public IEnumerable<IBook> GetBooks()
+        {
+            using (var context = new LibraryDataContext())
+            {
+                List<IBook> list = new List<IBook>();
+                context.Books.ToList();
+                foreach (Books Book in context.Books.ToList())
+                {
+                    list.Add(Transform(Book));
+                }
+                return list;
             }
         }
 
-        public override IEvent GetBorrow(int ID)
+        public IBook GetBookById(int ID)
         {
-            return storage.borrows.Find(x => x.EventID == ID);
+            using (var context = new LibraryDataContext())
+            {
+                foreach (Books Book in context.Books.ToList())
+                {
+                    if (Book.id.Equals(ID))
+                    {
+                        return Transform(Book);
+                    }
+                }
+                return null;
+            }
         }
 
-        public override int GetBorrowID(int ID)
+        public IEnumerable<IBook> GetBookByName(string Name)
         {
-            return storage.borrows.Find(x => x.EventID == ID).EventID;
+            using (var context = new LibraryDataContext())
+            {
+                List<IBook> list = new List<IBook>();
+                context.Books.ToList();
+                foreach (Books Book in context.Books.ToList())
+                {
+                    if (Book.title.Equals(Name))
+                    {
+                        list.Add(Transform(Book));
+                    }
+                }
+                return list;
+            }
+        }
+
+        public IBook GetBookByAuthor(string Author)
+        {
+            using (var context = new LibraryDataContext())
+            {
+                foreach (Books Book in context.Books.ToList())
+                {
+                    if (Book.author.Equals(Author))
+                    {
+                        return Transform(Book);
+                    }
+                }
+                return null;
+            }
+        }
+        public bool AddBook(int ID, string Name, string Author)
+        {
+            using (var context = new LibraryDataContext())
+            {
+                if (GetBookByName(Name) == null && !Name.Equals(null) && !ID.Equals(null) && !Author.Equals(null))
+                {
+                    Books NewBook = new Books
+                    {
+                        id = ID,
+                        title = Name,
+                        author = Author,
+                        isAvailable = true,
+                    };
+                    context.Books.InsertOnSubmit(NewBook);
+                    context.SubmitChanges();
+                    return true;
+                }
+                return false;
+            }
+        }
+
+        public bool UpdateBook(int ID, string Name, string Author)
+        {
+            using (var context = new LibraryDataContext())
+            {
+                Books Book = context.Books.SingleOrDefault(i => i.id == ID);
+                if (!ID.Equals(null) && !Name.Equals(null) && !Author.Equals(null))
+                {
+                    Book.id = ID;
+                    Book.title = Name;
+                    Book.author = Author;
+                    context.SubmitChanges();
+                    return true;
+                }
+                return false;
+            }
+        }
+
+        public bool DeleteBook(int ID)
+        {
+            using (var context = new LibraryDataContext())
+            {
+                Books Book = context.Books.SingleOrDefault(i => i.id == ID);
+                if (GetBookById(ID) != null && !ID.Equals(null))
+                {
+                    context.Books.DeleteOnSubmit(Book);
+                    context.SubmitChanges();
+                    return true;
+                }
+                return false;
+            }
+        }
+
+        public IEnumerable<IEvent> GetEvents()
+        {
+            using (var context = new LibraryDataContext())
+            {
+                List<IEvent> list = new List<IEvent>();
+                context.Events.ToList();
+                foreach (Events Event in context.Events.ToList())
+                {
+                    list.Add(Transform(Event));
+                }
+                return list;
+            }
+        }
+
+        public IEvent GetEventById(int ID)
+        {
+            using (var context = new LibraryDataContext())
+            {
+                foreach (Events Event in context.Events.ToList())
+                {
+                    if (Event.id.Equals(ID))
+                    {
+                        return Transform(Event);
+                    }
+                }
+                return null;
+            }
+        }
+
+        public IEnumerable<IEvent> GetEventsByReaderId(int ReaderID)
+        {
+            using (var context = new LibraryDataContext())
+            {
+                List<IEvent> list = new List<IEvent>();
+                foreach (Events Event in context.Events.ToList())
+                {
+                    if (Event.reader_id.Equals(ReaderID))
+                    {
+                        list.Add(Transform(Event));
+                    }
+                }
+                return list;
+            }
+        }
+
+        public bool AddEvent(int EventID, DateTime Date, int BookID, int ReaderID)
+        {
+            using (var context = new LibraryDataContext())
+            {
+                if (!EventID.Equals(null) && !Date.Equals(null) && !BookID.Equals(null) && !ReaderID.Equals(null))
+                {
+                    Books Book = context.Books.SingleOrDefault(i => i.id == BookID);
+                    Readers Reader = context.Readers.SingleOrDefault(i => i.id == ReaderID);
+                    Book.isAvailable = false;
+
+                    Events NewEvent = new Events
+                    {
+                        id = EventID,
+                        date = Date,
+                        book_id = BookID,
+                        reader_id = ReaderID,
+                    };
+                    context.Events.InsertOnSubmit(NewEvent);
+                    context.SubmitChanges();
+                    return true;
+                }
+                return false;
+            }
+        }
+
+        public bool UpdateEventBook(int ID, int BookID)
+        {
+            using (var context = new LibraryDataContext())
+            {
+                Events Event = context.Events.SingleOrDefault(i => i.id == ID);
+                if (!BookID.Equals(null))
+                {
+                    Event.book_id = BookID;
+                    context.SubmitChanges();
+                    return true;
+                }
+                return false;
+            }
+        }
+        public bool UpdateEventReader(int ID, int ReaderID)
+        {
+            using (var context = new LibraryDataContext())
+            {
+                Events Event = context.Events.SingleOrDefault(i => i.id == ID);
+                if (!ReaderID.Equals(null))
+                {
+                    Event.reader_id = ReaderID;
+                    context.SubmitChanges();
+                    return true;
+                }
+                return false;
+            }
+        }
+
+        public bool DeleteEvent(int ID)
+        {
+            using (var context = new LibraryDataContext())
+            {
+                Events Event = context.Events.SingleOrDefault(i => i.id == ID);
+                if (GetEventById(ID) != null && !ID.Equals(null))
+                {
+                    context.Events.DeleteOnSubmit(Event);
+                    context.SubmitChanges();
+                    return true;
+                }
+                return false;
+            }
         }
     }
 }

@@ -1,5 +1,6 @@
-﻿
-namespace Data
+﻿using Data.API;
+
+namespace Data.DataFiles
 {
     public class Content : IContent
     {

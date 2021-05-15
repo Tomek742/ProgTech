@@ -1,20 +1,21 @@
 ﻿using System;
+using Data.API;
 
-namespace Data
+namespace Data.DataFiles
 {
     public class Event : IEvent
     {
-        public IBook BookItem { get; set; }
-        public IReader ReaderPerson { get; set; }
-        public DateTime Date { get; set; }
         public int EventID { get; set; }
+        public DateTime? Date { get; set; }
+        public int? BookID { get; set; }
+        public int? ReaderID { get; set; }
 
-        public Event(IBook bookItem, IReader readerPerson, DateTime date, int eventID)
+        public Event(int eventID, DateTime? date, int? bookID, int? readerID)
         {
-            BookItem = bookItem;
-            ReaderPerson = readerPerson;
-            Date = date;
             EventID = eventID;
+            Date = date;
+            BookID = bookID;
+            ReaderID = readerID;
         }
     }
 }

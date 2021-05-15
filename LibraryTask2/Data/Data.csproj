@@ -30,6 +30,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -45,15 +48,13 @@
     <Compile Include="DataFiles\Book.cs" />
     <Compile Include="DataFiles\Content.cs" />
     <Compile Include="DataFiles\DataManager.cs" />
-    <Compile Include="DataFiles\DataStorage.cs" />
     <Compile Include="DataFiles\Event.cs" />
     <Compile Include="API\IBook.cs" />
     <Compile Include="API\IContent.cs" />
-    <Compile Include="API\DataManagerBase.cs" />
-    <Compile Include="API\IDataStorage.cs" />
+    <Compile Include="API\IDataManager.cs" />
     <Compile Include="API\IEvent.cs" />
     <Compile Include="API\IReader.cs" />
-    <Compile Include="Database\Library.designer.cs">
+    <Compile Include="Library.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Library.dbml</DependentUpon>
@@ -68,12 +69,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="Database\Library.dbml">
+    <None Include="Library.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Library.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <None Include="Database\Library.dbml.layout">
+    <None Include="Library.dbml.layout">
       <DependentUpon>Library.dbml</DependentUpon>
     </None>
     <None Include="Properties\Settings.settings">
@@ -84,5 +85,6 @@
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
