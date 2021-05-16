@@ -62,7 +62,7 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <TextBox IsReadOnly="True" Text="{Binding CurrentReader.ID, Mode=OneWay}" Grid.Column="0" Grid.Row="0" />
+            <TextBox IsReadOnly="True" Text="{Binding CurrentReader.ID}" Grid.Column="0" Grid.Row="0" />
             <TextBox IsReadOnly="True" Text="{Binding CurrentReader.Name}" Grid.Column="1" Grid.Row="0" />
         </Grid>
         <Label Content="Detail View:" FontSize="14" FontWeight="Bold" Margin="60,20,0,0" Grid.Column="0" Grid.Row="1"/>

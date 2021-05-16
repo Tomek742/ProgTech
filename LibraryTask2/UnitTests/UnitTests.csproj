@@ -69,6 +69,9 @@
     <Compile Include="Data\BookTests.cs" />
     <Compile Include="Data\EventTests.cs" />
     <Compile Include="Data\ReaderTests.cs" />
+    <Compile Include="Presentation\BookViewModelTests.cs" />
+    <Compile Include="Presentation\EventViewModelTests.cs" />
+    <Compile Include="Presentation\ReaderViewModelTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\BookTests.cs" />
     <Compile Include="Service\EventTests.cs" />
@@ -82,14 +85,20 @@
       <Project>{26750705-1cf3-4435-b262-443a8ff09bf3}</Project>
       <Name>Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\PresentationView\PresentationView.csproj">
+      <Project>{4f48cc42-59b3-4af8-bc48-19a7200e80c2}</Project>
+      <Name>PresentationView</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Presentation\Presentation.csproj">
+      <Project>{3e9fedb0-6514-4af2-9c5b-21ed23cbf389}</Project>
+      <Name>Presentation</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Service\Service.csproj">
       <Project>{25969c74-4c2f-455a-bbbc-928b73d97d52}</Project>
       <Name>Service</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Presentation\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

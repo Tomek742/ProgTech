@@ -37,11 +37,11 @@
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <Button Content="Add Book" Grid.Column="0" Grid.Row="0" Command="{Binding AddEventCommand}"/>
-            <Button Content="Update Book Name" Grid.Column="0" Grid.Row="1" Width="Auto" Command="{Binding UpdateEventBookCommand}"/>
-            <Button Content="Update Book Reader" Grid.Column="0" Grid.Row="2" Width="Auto" Command="{Binding UpdateEventReaderCommand}"/>
+            <Button Content="Add Event" Grid.Column="0" Grid.Row="0" Command="{Binding AddEventCommand}"/>
+            <Button Content="Update Event Book" Grid.Column="0" Grid.Row="1" Width="Auto" Command="{Binding UpdateEventBookCommand}"/>
+            <Button Content="Update Event Reader" Grid.Column="0" Grid.Row="2" Width="Auto" Command="{Binding UpdateEventReaderCommand}"/>
         </Grid>
-        <Button Content="Delete Book" Grid.Column="0" Grid.Row="1" Width="Auto" Command="{Binding DeleteEventCommand}"/>
+        <Button Content="Delete Event" Grid.Column="0" Grid.Row="1" Width="Auto" Command="{Binding DeleteEventCommand}"/>
         <Grid Grid.Column="1" Grid.Row="0">
             <Grid.RowDefinitions>
                 <RowDefinition/>
