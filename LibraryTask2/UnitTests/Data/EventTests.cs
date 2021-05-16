@@ -41,10 +41,12 @@ namespace UnitTests.Data
 
             Assert.IsTrue(manager.AddEvent(1, DateTime.Now, manager.GetBookByID(1).BookID, manager.GetReader(1).ReaderID));
 
+            //Assert.IsFalse(manager.GetBookByID(1).IsAvailable);
+
             Assert.IsTrue(manager.UpdateEventBook(manager.GetEventByID(1).EventID, 2));
             Assert.IsTrue(manager.UpdateEventReader(manager.GetEventByID(1).EventID, 2));
 
-            //Assert.IsFalse(manager.GetBookByID(1).IsAvailable);
+            Assert.IsTrue(manager.GetBookByID(1).IsAvailable);
 
             Assert.IsTrue(manager.DeleteEvent(manager.GetEventByID(1).EventID));
             Assert.IsTrue(manager.DeleteBook(manager.GetBookByID(1).BookID));
