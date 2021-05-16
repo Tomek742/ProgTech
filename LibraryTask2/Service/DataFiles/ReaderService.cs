@@ -9,7 +9,7 @@ using Service.API;
 
 namespace Service.DataFiles
 {
-    class ReaderService : IReaderService
+    public class ReaderService : IReaderService
     {
         private IDataManager manager;
         public ReaderService(IDataManager manager)

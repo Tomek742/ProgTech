@@ -128,7 +128,7 @@ namespace Data.DataFiles
             }
         }
 
-        public IEnumerable<IBook> GetBookByName(string Name)
+        public IEnumerable<IBook> GetBooksByAuthor(string Author)
         {
             using (var context = new LibraryDataContext())
             {
@@ -136,7 +136,7 @@ namespace Data.DataFiles
                 context.Books.ToList();
                 foreach (Books Book in context.Books.ToList())
                 {
-                    if (Book.title.Equals(Name))
+                    if (Book.author.Equals(Author))
                     {
                         list.Add(Transform(Book));
                         return list;
@@ -146,13 +146,13 @@ namespace Data.DataFiles
             }
         }
 
-        public IBook GetBookByAuthor(string Author)
+        public IBook GetBookByName(string Name)
         {
             using (var context = new LibraryDataContext())
             {
                 foreach (Books Book in context.Books.ToList())
                 {
-                    if (Book.author.Equals(Author))
+                    if (Book.title.Equals(Name))
                     {
                         return Transform(Book);
                     }

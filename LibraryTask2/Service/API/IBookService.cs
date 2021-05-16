@@ -11,8 +11,8 @@ namespace Service.API
     {
         IEnumerable<IBook> GetBooks();
         IBook GetBookByID(int ID);
-        IEnumerable<IBook> GetBookByName(string Name);
-        IBook GetBookByAuthor(string Author);
+        IEnumerable<IBook> GetBooksByAuthor(string Author);
+        IBook GetBookByName(string Name);
         bool AddBook(int ID, string Name, string Author);
         bool UpdateBook(int ID, string Name, string Author);
         bool DeleteBook(int ID);

@@ -10,7 +10,7 @@ using Data;
 
 namespace Service.DataFiles
 {
-    class BookService : IBookService
+    public class BookService : IBookService
     {
         private IDataManager manager;
         public BookService(IDataManager manager)
@@ -31,14 +31,14 @@ namespace Service.DataFiles
             return manager.GetBookByID(ID);
         }
 
-        public IEnumerable<IBook> GetBookByName(string Name)
+        public IEnumerable<IBook> GetBooksByAuthor(string Author)
         {
-            return manager.GetBookByName(Name);
+            return manager.GetBooksByAuthor(Author);
         }
 
-        public IBook GetBookByAuthor(string Author)
+        public IBook GetBookByName(string Name)
         {
-            return manager.GetBookByAuthor(Author);
+            return manager.GetBookByName(Name);
         }
         public bool AddBook(int ID, string Name, string Author)
         {
