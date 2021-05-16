@@ -3,16 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Data.Database;
+using Data.API;
 
 namespace Service.API
 {
-    interface IEventService
+    public interface IEventService
     {
-        IEnumerable<Event> GetEvents();
-        Event GetEventById(int ID);
-        bool AddEvent(DateTime date, int ID, int BookID, int ReaderID);
-        bool UpdateEvent(int ID, int ReaderID);
+        IEnumerable<IEvent> GetEvents();
+        IEvent GetEventByID(int ID);
+        IEnumerable<IEvent> GetEventsByReaderID(int ID);
+        bool AddEvent(int EventID, DateTime Date, int BookID, int ReaderID);
+        bool UpdateEventBook(int ID, int BookID);
+        bool UpdateEventReader(int ID, int ReaderID);
         bool DeleteEvent(int ID);
     }
 }

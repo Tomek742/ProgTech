@@ -3,87 +3,56 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Data.Database;
+using Data.DataFiles;
+using Data.API;
 using Service.API;
+using Data;
 
 namespace Service.DataFiles
 {
     class BookService : IBookService
     {
-        public IEnumerable<Book> GetBooks()
+        private IDataManager manager;
+        public BookService(IDataManager manager)
         {
-            using (var context = new LibraryDataContext())
-            {
-                return context.Books.ToList();
-            }
+            this.manager = manager;
+        }
+        public BookService()
+        {
+            this.manager = new DataManager();
+        }
+        public IEnumerable<IBook> GetBooks()
+        {
+            return manager.GetBooks();
         }
 
-        public Book GetBook(int ID)
+        public IBook GetBookByID(int ID)
         {
-            using (var context = new LibraryDataContext())
-            {
-                foreach (Book Book in context.Books.ToList())
-                {
-                    if (Book.id.Equals(ID))
-                    {
-                        return Book;
-                    }
-                }
-                return null;
-            }
+            return manager.GetBookByID(ID);
         }
 
-        public bool AddBook(int ID, string Title, string Author)
+        public IEnumerable<IBook> GetBookByName(string Name)
         {
-            using (var context = new LibraryDataContext())
-            {
-                if (GetBook(ID) == null && !Title.Equals(null) && !Author.Equals(null))
-                {
-                    Book NewBook = new Book
-                    {
-                        id = ID,
-                        title = Title,
-                        author = Author,
-                        isAvailable = true
-                    };
-                    context.Books.InsertOnSubmit(NewBook);
-                    context.SubmitChanges();
-                    return true;
-                }
-                return false;
-            }
+            return manager.GetBookByName(Name);
         }
 
-        public bool UpdateBook(int ID, string Title, string Author)
+        public IBook GetBookByAuthor(string Author)
         {
-            using (var context = new LibraryDataContext())
-            {
-                Book Book = context.Books.SingleOrDefault(i => i.id == ID);
-                if (GetBook(ID) == null && !Title.Equals(null) && !Author.Equals(null))
-                {
-                    Book.id = ID;
-                    Book.title = Title;
-                    Book.author = Author;
-                    context.SubmitChanges();
-                    return true;
-                }
-                return false;
-            }
+            return manager.GetBookByAuthor(Author);
+        }
+        public bool AddBook(int ID, string Name, string Author)
+        {
+            return manager.AddBook(ID, Name, Author);
+        }
+
+        public bool UpdateBook(int ID, string Name, string Author)
+        {
+            return manager.UpdateBook(ID, Name, Author);
         }
 
         public bool DeleteBook(int ID)
         {
-            using (var context = new LibraryDataContext())
-            {
-                Book Book = context.Books.SingleOrDefault(i => i.id == ID);
-                if (GetBook(ID) != null)
-                {
-                    context.Books.DeleteOnSubmit(Book);
-                    context.SubmitChanges();
-                    return true;
-                }
-                return false;
-            }
+            return manager.DeleteBook(ID);
         }
     }
 }

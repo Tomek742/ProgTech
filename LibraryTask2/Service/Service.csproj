@@ -45,10 +45,8 @@
     <Compile Include="API\IBookService.cs" />
     <Compile Include="API\IEventService.cs" />
     <Compile Include="API\IReaderService.cs" />
-    <Compile Include="API\LibraryManager.cs" />
     <Compile Include="DataFiles\BookService.cs" />
     <Compile Include="DataFiles\EventService.cs" />
-    <Compile Include="DataFiles\ILibraryManager.cs" />
     <Compile Include="DataFiles\ReaderService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -3,95 +3,56 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Data.Database;
+using Data.DataFiles;
+using Data.API;
 using Service.API;
 
 namespace Service.DataFiles
 {
     class EventService : IEventService
     {
-        public IEnumerable<Event> GetEvents()
+        private IDataManager manager;
+        public EventService(IDataManager manager)
         {
-            using (var context = new LibraryDataContext())
-            {
-                return context.Events.ToList();
-            }
+            this.manager = manager;
+        }
+        public EventService()
+        {
+            this.manager = new DataManager();
+        }
+        public IEnumerable<IEvent> GetEvents()
+        {
+            return manager.GetEvents();
         }
 
-        public Event GetEventById(int ID)
+        public IEvent GetEventByID(int ID)
         {
-            using (var context = new LibraryDataContext())
-            {
-                foreach (Event Event in context.Events.ToList())
-                {
-                    if (Event.id.Equals(ID))
-                    {
-                        return Event;
-                    }
-                }
-                return null;
-            }
+            return manager.GetEventByID(ID);
         }
 
-        public bool AddEvent(DateTime date, int ID, int BookID, int ReaderID)
+        public IEnumerable<IEvent> GetEventsByReaderID(int ID)
         {
-            using (var context = new LibraryDataContext())
-            {
-                if (!date.Equals(null) && !ID.Equals(null) && !BookID.Equals(null) && !ReaderID.Equals(null))
-                {
-                    Book Book = context.Books.SingleOrDefault(i => i.id == BookID);
-                    Reader Reader = context.Readers.SingleOrDefault(i => i.id == ReaderID);
-                    if (Book.isAvailable == true)
-                    {
-                        Event NewEvent = new Event
-                        {
-                            date = date,
-                            id = ID,
-                            book_id = BookID,
-                            reader_id = ReaderID,
-                        };
-                        context.Events.InsertOnSubmit(NewEvent);
-                        context.SubmitChanges();
-                        Book.isAvailable = false;
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
-                }
-                return false;
-            }
+            return manager.GetEventsByReaderID(ID);
         }
 
-        public bool UpdateEvent(int ID, int ReaderID)
+        public bool AddEvent(int EventID, DateTime Date, int BookID, int ReaderID)
         {
-            using (var context = new LibraryDataContext())
-            {
-                Event Event = context.Events.SingleOrDefault(i => i.id == ID);
-                if (!ReaderID.Equals(null))
-                {
-                    Event.reader_id = ReaderID;
-                    context.SubmitChanges();
-                    return true;
-                }
-                return false;
-            }
+            return manager.AddEvent(EventID, Date, BookID, ReaderID);
+        }
+
+        public bool UpdateEventBook(int ID, int BookID)
+        {
+            return manager.UpdateEventBook(ID, BookID);
+        }
+
+        public bool UpdateEventReader(int ID, int ReaderID)
+        {
+            return manager.UpdateEventReader(ID, ReaderID);
         }
 
         public bool DeleteEvent(int ID)
         {
-            using (var context = new LibraryDataContext())
-            {
-                Event Event = context.Events.SingleOrDefault(i => i.id == ID);
-                if (GetEventById(ID) != null && !ID.Equals(null))
-                {
-                    context.Events.DeleteOnSubmit(Event);
-                    context.SubmitChanges();
-                    return true;
-                }
-                return false;
-            }
+            return manager.DeleteEvent(ID);
         }
     }
 }
