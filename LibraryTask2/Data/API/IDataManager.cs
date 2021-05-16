@@ -16,7 +16,7 @@ namespace Data.API
         bool DeleteReader(int ID);
 
         IEnumerable<IBook> GetBooks();
-        IBook GetBookById(int ID);
+        IBook GetBookByID(int ID);
         IEnumerable<IBook> GetBookByName(string Name);
         IBook GetBookByAuthor(string Author);
         bool AddBook(int ID, string Name, string Author);
@@ -24,8 +24,8 @@ namespace Data.API
         bool DeleteBook(int ID);
 
         IEnumerable<IEvent> GetEvents();
-        IEvent GetEventById(int ID);
-        IEnumerable<IEvent> GetEventsByReaderId(int ReaderID);
+        IEvent GetEventByID(int ID);
+        IEnumerable<IEvent> GetEventsByReaderID(int ReaderID);
         bool AddEvent(int EventID, DateTime Date, int BookID, int ReaderID);
         bool UpdateEventBook(int ID, int BookID);
         bool UpdateEventReader(int ID, int ReaderID);

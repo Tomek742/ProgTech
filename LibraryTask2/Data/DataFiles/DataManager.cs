@@ -74,7 +74,7 @@ namespace Data.DataFiles
             using (var context = new LibraryDataContext())
             {
                 Readers Reader = context.Readers.SingleOrDefault(i => i.id == ID);
-                if (GetReader(ID) == null && !Name.Equals(null))
+                if (GetReader(ID) != null && !Name.Equals(null))
                 {
                     Reader.name = Name;
                     Reader.id = ID;
@@ -113,7 +113,7 @@ namespace Data.DataFiles
             }
         }
 
-        public IBook GetBookById(int ID)
+        public IBook GetBookByID(int ID)
         {
             using (var context = new LibraryDataContext())
             {
@@ -139,9 +139,10 @@ namespace Data.DataFiles
                     if (Book.title.Equals(Name))
                     {
                         list.Add(Transform(Book));
+                        return list;
                     }
                 }
-                return list;
+                return null;
             }
         }
 
@@ -197,13 +198,27 @@ namespace Data.DataFiles
             }
         }
 
+        public void ReturnBook(int? ID)
+        {
+            using (var context = new LibraryDataContext())
+            {
+                Books Book = context.Books.SingleOrDefault(i => i.id == ID);
+                if (GetBookByID(ID.GetValueOrDefault()) != null && !ID.Equals(null))
+                {
+                    Book.isAvailable = true;
+                    context.SubmitChanges();
+                }
+            }
+        }
+
         public bool DeleteBook(int ID)
         {
             using (var context = new LibraryDataContext())
             {
                 Books Book = context.Books.SingleOrDefault(i => i.id == ID);
-                if (GetBookById(ID) != null && !ID.Equals(null))
+                if (GetBookByID(ID) != null && !ID.Equals(null))
                 {
+
                     context.Books.DeleteOnSubmit(Book);
                     context.SubmitChanges();
                     return true;
@@ -226,7 +241,7 @@ namespace Data.DataFiles
             }
         }
 
-        public IEvent GetEventById(int ID)
+        public IEvent GetEventByID(int ID)
         {
             using (var context = new LibraryDataContext())
             {
@@ -241,7 +256,7 @@ namespace Data.DataFiles
             }
         }
 
-        public IEnumerable<IEvent> GetEventsByReaderId(int ReaderID)
+        public IEnumerable<IEvent> GetEventsByReaderID(int ReaderID)
         {
             using (var context = new LibraryDataContext())
             {
@@ -289,6 +304,7 @@ namespace Data.DataFiles
                 Events Event = context.Events.SingleOrDefault(i => i.id == ID);
                 if (!BookID.Equals(null))
                 {
+                    ReturnBook(Event.book_id);
                     Event.book_id = BookID;
                     context.SubmitChanges();
                     return true;
@@ -316,8 +332,9 @@ namespace Data.DataFiles
             using (var context = new LibraryDataContext())
             {
                 Events Event = context.Events.SingleOrDefault(i => i.id == ID);
-                if (GetEventById(ID) != null && !ID.Equals(null))
+                if (GetEventByID(ID) != null && !ID.Equals(null))
                 {
+                    ReturnBook(Event.book_id);
                     context.Events.DeleteOnSubmit(Event);
                     context.SubmitChanges();
                     return true;

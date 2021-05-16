@@ -132,7 +132,7 @@ namespace Data
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL", IsPrimaryKey=true)]
 		public int id
 		{
 			get
@@ -272,9 +272,9 @@ namespace Data
 		
 		private System.Nullable<int> _reader_id;
 		
-		private EntityRef<Books> _Book;
+		private EntityRef<Books> _Books;
 		
-		private EntityRef<Readers> _Reader;
+		private EntityRef<Readers> _Readers;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -292,12 +292,12 @@ namespace Data
 		
 		public Events()
 		{
-			this._Book = default(EntityRef<Books>);
-			this._Reader = default(EntityRef<Readers>);
+			this._Books = default(EntityRef<Books>);
+			this._Readers = default(EntityRef<Readers>);
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL", IsPrimaryKey=true)]
 		public int id
 		{
 			get
@@ -348,7 +348,7 @@ namespace Data
 			{
 				if ((this._book_id != value))
 				{
-					if (this._Book.HasLoadedOrAssignedValue)
+					if (this._Books.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
@@ -372,7 +372,7 @@ namespace Data
 			{
 				if ((this._reader_id != value))
 				{
-					if (this._Reader.HasLoadedOrAssignedValue)
+					if (this._Readers.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
@@ -385,26 +385,26 @@ namespace Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Book_Event", Storage="_Book", ThisKey="book_id", OtherKey="id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Book_Event", Storage="_Books", ThisKey="book_id", OtherKey="id", IsForeignKey=true)]
 		public Books Books
 		{
 			get
 			{
-				return this._Book.Entity;
+				return this._Books.Entity;
 			}
 			set
 			{
-				Books previousValue = this._Book.Entity;
+				Books previousValue = this._Books.Entity;
 				if (((previousValue != value) 
-							|| (this._Book.HasLoadedOrAssignedValue == false)))
+							|| (this._Books.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._Book.Entity = null;
+						this._Books.Entity = null;
 						previousValue.Events.Remove(this);
 					}
-					this._Book.Entity = value;
+					this._Books.Entity = value;
 					if ((value != null))
 					{
 						value.Events.Add(this);
@@ -419,26 +419,26 @@ namespace Data
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Reader_Event", Storage="_Reader", ThisKey="reader_id", OtherKey="id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Reader_Event", Storage="_Readers", ThisKey="reader_id", OtherKey="id", IsForeignKey=true)]
 		public Readers Readers
 		{
 			get
 			{
-				return this._Reader.Entity;
+				return this._Readers.Entity;
 			}
 			set
 			{
-				Readers previousValue = this._Reader.Entity;
+				Readers previousValue = this._Readers.Entity;
 				if (((previousValue != value) 
-							|| (this._Reader.HasLoadedOrAssignedValue == false)))
+							|| (this._Readers.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._Reader.Entity = null;
+						this._Readers.Entity = null;
 						previousValue.Events.Remove(this);
 					}
-					this._Reader.Entity = value;
+					this._Readers.Entity = value;
 					if ((value != null))
 					{
 						value.Events.Add(this);
@@ -502,7 +502,7 @@ namespace Data
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL", IsPrimaryKey=true)]
 		public int id
 		{
 			get
