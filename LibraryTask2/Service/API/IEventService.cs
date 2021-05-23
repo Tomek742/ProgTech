@@ -9,9 +9,9 @@ namespace Service.API
 {
     public interface IEventService
     {
-        IEnumerable<IEvent> GetEvents();
-        IEvent GetEventByID(int ID);
-        IEnumerable<IEvent> GetEventsByReaderID(int ID);
+        IEnumerable<IEventData> GetEvents();
+        IEventData GetEventByID(int ID);
+        IEnumerable<IEventData> GetEventsByReaderID(int ID);
         bool AddEvent(int EventID, DateTime Date, int BookID, int ReaderID);
         bool UpdateEventBook(int ID, int BookID);
         bool UpdateEventReader(int ID, int ReaderID);

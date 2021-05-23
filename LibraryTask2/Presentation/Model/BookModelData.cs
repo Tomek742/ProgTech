@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Data.API;
+using Service.DataFiles;
 using Service.API;
 using Presentation.API;
 
@@ -17,16 +17,16 @@ namespace Presentation.Model
             Service = service;
         }
 
-        public IEnumerable<IBook> Book
+        public IEnumerable<IBookData> Book
         {
             get
             {
-                IEnumerable<IBook> books = Service.GetBooks();
+                IEnumerable<IBookData> books = Service.GetBooks();
                 return books;
             }
         }
 
-        public IBook CreateBook(string Title, string Author, int ID)
+        public IBookModelView CreateBook(string Title, string Author, int ID)
         {
             return new BookModelView(Title, Author, ID);
         }

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Data.API;
 using Service.DataFiles;
 using Service.API;
 using Presentation.ViewModel.MVVM;
@@ -87,8 +86,8 @@ namespace Presentation.ViewModel
             MessageBoxShowDelegate(Text);
         }
 
-        private IEvent currentEvent;
-        public IEvent CurrentEvent
+        private IEventData currentEvent;
+        public IEventData CurrentEvent
         {
             get => currentEvent;
             set
@@ -143,8 +142,8 @@ namespace Presentation.ViewModel
             Events = service.GetEvents();
         }
 
-        private IEnumerable<IEvent> events;
-        public IEnumerable<IEvent> Events
+        private IEnumerable<IEventData> events;
+        public IEnumerable<IEventData> Events
         {
             get
             {

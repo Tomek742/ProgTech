@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Data.API;
 using Service.DataFiles;
 using Service.API;
 using Presentation.ViewModel.MVVM;
@@ -103,8 +102,8 @@ namespace Presentation.ViewModel
             MessageBoxShowDelegate(Text);
         }
 
-        private IBook currentBook;
-        public IBook CurrentBook
+        private IBookData currentBook;
+        public IBookData CurrentBook
         {
             get => currentBook;
             set
@@ -146,8 +145,8 @@ namespace Presentation.ViewModel
             Books = service.GetBooks();
         }
 
-        private IEnumerable<IBook> books;
-        public IEnumerable<IBook> Books
+        private IEnumerable<IBookData> books;
+        public IEnumerable<IBookData> Books
         {
             get
             {

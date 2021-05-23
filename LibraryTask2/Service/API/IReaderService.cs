@@ -9,8 +9,8 @@ namespace Service.API
 {
     public interface IReaderService
     {
-        IEnumerable<IReader> GetReaders();
-        IReader GetReader(int ID);
+        IEnumerable<IReaderData> GetReaders();
+        IReaderData GetReader(int ID);
         bool AddReader(int ID, string Name);
         bool UpdateReader(int ID, string Name);
         bool DeleteReader(int ID);

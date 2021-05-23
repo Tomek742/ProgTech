@@ -42,11 +42,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="API\IBookData.cs" />
     <Compile Include="API\IBookService.cs" />
+    <Compile Include="API\IEventData.cs" />
     <Compile Include="API\IEventService.cs" />
+    <Compile Include="API\IReaderData.cs" />
     <Compile Include="API\IReaderService.cs" />
+    <Compile Include="DataFiles\BookData.cs" />
     <Compile Include="DataFiles\BookService.cs" />
+    <Compile Include="DataFiles\EventData.cs" />
     <Compile Include="DataFiles\EventService.cs" />
+    <Compile Include="DataFiles\ReaderData.cs" />
     <Compile Include="DataFiles\ReaderService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

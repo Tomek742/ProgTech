@@ -151,7 +151,7 @@ namespace Data.DataFiles
         public bool UpdateBook(int ID, string Name, string Author)
         {
             Books Book = context.Books.Where(i => i.id == ID).SingleOrDefault();
-            if (!ID.Equals(null) && !Name.Equals(null) && !Author.Equals(null))
+            if (!ID.Equals(null) && !Name.Equals(null) && !Author.Equals(null) && GetBookByID(ID) != null)
             {
                 Book.id = ID;
                 Book.title = Name;

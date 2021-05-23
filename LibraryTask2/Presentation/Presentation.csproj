@@ -42,8 +42,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="API\IBookModelData.cs" />
+    <Compile Include="API\IBookModelView.cs" />
     <Compile Include="API\IEventModelData.cs" />
+    <Compile Include="API\IEventModelView.cs" />
     <Compile Include="API\IReaderModelData.cs" />
+    <Compile Include="API\IReaderModelView.cs" />
     <Compile Include="Model\BookModelData.cs" />
     <Compile Include="Model\BookModelView.cs" />
     <Compile Include="Model\EventModelData.cs" />
@@ -60,10 +63,6 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\Data\Data.csproj">
-      <Project>{26750705-1cf3-4435-b262-443a8ff09bf3}</Project>
-      <Name>Data</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Service\Service.csproj">
       <Project>{25969c74-4c2f-455a-bbbc-928b73d97d52}</Project>
       <Name>Service</Name>

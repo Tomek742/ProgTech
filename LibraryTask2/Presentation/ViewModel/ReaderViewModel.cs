@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Data.API;
 using Service.DataFiles;
 using Service.API;
 using Presentation.ViewModel.MVVM;
@@ -75,8 +74,8 @@ namespace Presentation.ViewModel
             MessageBoxShowDelegate(Text);
         }
 
-        private IReader currentReader;
-        public IReader CurrentReader
+        private IReaderData currentReader;
+        public IReaderData CurrentReader
         {
             get => currentReader;
             set
@@ -117,8 +116,8 @@ namespace Presentation.ViewModel
             Readers = service.GetReaders();
         }
 
-        private IEnumerable<IReader> readers;
-        public IEnumerable<IReader> Readers
+        private IEnumerable<IReaderData> readers;
+        public IEnumerable<IReaderData> Readers
         {
             get
             {

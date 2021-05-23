@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Data.API;
+using Service.API;
+using Presentation.API;
 
 namespace Presentation.Model
 {
-    public class ReaderModelView : IReader
+    public class ReaderModelView : IReaderModelView
     {
         public string Name { get; set; }
         public int ReaderID { get; set; }

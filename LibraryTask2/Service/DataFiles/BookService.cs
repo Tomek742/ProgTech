@@ -21,24 +21,55 @@ namespace Service.DataFiles
         {
             this.manager = new DataManager();
         }
-        public IEnumerable<IBook> GetBooks()
+        public IBookData Transfer(IBook book)
         {
-            return manager.GetBooks();
+            if (book == null)
+            {
+                return null;
+            }
+
+            return new BookData
+            {
+                Name = book.Name,
+                Author = book.Author,
+                BookID = book.BookID,
+                IsAvailable = book.IsAvailable,
+            };
+        }
+        public IEnumerable<IBookData> GetBooks()
+        {
+            var books = manager.GetBooks();
+            var result = new List<IBookData>();
+
+            foreach (var book in books)
+            {
+                result.Add(Transfer(book));
+            }
+
+            return result;
         }
 
-        public IBook GetBookByID(int ID)
+        public IBookData GetBookByID(int ID)
         {
-            return manager.GetBookByID(ID);
+            return Transfer(manager.GetBookByID(ID));
         }
 
-        public IEnumerable<IBook> GetBooksByAuthor(string Author)
+        public IEnumerable<IBookData> GetBooksByAuthor(string Author)
         {
-            return manager.GetBooksByAuthor(Author);
+            var books = manager.GetBooksByAuthor(Author);
+            var result = new List<IBookData>();
+
+            foreach (var book in books)
+            {
+                result.Add(Transfer(book));
+            }
+
+            return result;
         }
 
-        public IBook GetBookByName(string Name)
+        public IBookData GetBookByName(string Name)
         {
-            return manager.GetBookByName(Name);
+            return Transfer(manager.GetBookByName(Name));
         }
         public bool AddBook(int ID, string Name, string Author)
         {

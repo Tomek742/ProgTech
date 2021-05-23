@@ -20,19 +20,52 @@ namespace Service.DataFiles
         {
             this.manager = new DataManager();
         }
-        public IEnumerable<IEvent> GetEvents()
+
+        public IEventData Transfer(IEvent _event)
         {
-            return manager.GetEvents();
+            if (_event == null)
+            {
+                return null;
+            }
+
+            return new EventData
+            {
+                EventID = _event.EventID,
+                Date = _event.Date,
+                BookID = _event.BookID,
+                ReaderID = _event.ReaderID,
+            };
         }
 
-        public IEvent GetEventByID(int ID)
+        public IEnumerable<IEventData> GetEvents()
         {
-            return manager.GetEventByID(ID);
+            var events = manager.GetEvents();
+            var result = new List<IEventData>();
+
+            foreach (var _event in events)
+            {
+                result.Add(Transfer(_event));
+            }
+
+            return result;
         }
 
-        public IEnumerable<IEvent> GetEventsByReaderID(int ID)
+        public IEventData GetEventByID(int ID)
         {
-            return manager.GetEventsByReaderID(ID);
+            return Transfer(manager.GetEventByID(ID));
+        }
+
+        public IEnumerable<IEventData> GetEventsByReaderID(int ID)
+        {
+            var events = manager.GetEventsByReaderID(ID);
+            var result = new List<IEventData>();
+
+            foreach (var _event in events)
+            {
+                result.Add(Transfer(_event));
+            }
+
+            return result;
         }
 
         public bool AddEvent(int EventID, DateTime Date, int BookID, int ReaderID)

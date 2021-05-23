@@ -20,14 +20,37 @@ namespace Service.DataFiles
         {
             this.manager = new DataManager();
         }
-        public IEnumerable<IReader> GetReaders()
+
+        public IReaderData Transfer(IReader reader)
         {
-            return manager.GetReaders();
+            if (reader == null)
+            {
+                return null;
+            }
+
+            return new ReaderData
+            {
+                Name = reader.Name,
+                ReaderID = reader.ReaderID,
+            };
         }
 
-        public IReader GetReader(int ID)
+        public IEnumerable<IReaderData> GetReaders()
         {
-            return manager.GetReader(ID);
+            var readers = manager.GetReaders();
+            var result = new List<IReaderData>();
+
+            foreach (var reader in readers)
+            {
+                result.Add(Transfer(reader));
+            }
+
+            return result;
+        }
+
+        public IReaderData GetReader(int ID)
+        {
+            return Transfer(manager.GetReader(ID));
         }
 
         public bool AddReader(int ID, string Name)
