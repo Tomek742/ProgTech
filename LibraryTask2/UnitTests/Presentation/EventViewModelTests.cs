@@ -1,5 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using Presentation.ViewModel;
 
 namespace UnitTests.Presentation

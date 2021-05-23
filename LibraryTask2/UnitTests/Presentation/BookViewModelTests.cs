@@ -1,12 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using Data.API;
-using Data.DataFiles;
-using Service.DataFiles;
-using Service.API;
 using Presentation.ViewModel;
-using Presentation.Model;
-using PresentationView;
 
 namespace UnitTests.Presentation
 {

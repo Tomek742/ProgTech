@@ -1,7 +1,7 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using Data.API;
+﻿using Data.API;
 using Data.DataFiles;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace UnitTests.Data
 {

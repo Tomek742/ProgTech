@@ -1,10 +1,7 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using Service.API;
-using System.Linq;
-using Service.DataFiles;
-using Data.API;
+﻿using Data.API;
 using Data.DataFiles;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Service.DataFiles;
 
 namespace UnitTests.Service
 {
